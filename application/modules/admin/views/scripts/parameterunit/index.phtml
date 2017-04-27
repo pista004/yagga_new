@@ -1,0 +1,62 @@
+<h1>Jednotky</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'parameterunit', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit jednotku</a>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-4 text-left product-count">
+        <p>Počet nalezených jednotek: <?= $this->paginator->getTotalItemCount(); ?> </p>
+    </div>
+    <div class="col-md-8 text-right">
+        <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/parameterunit/', 'urlParams' => $this->filterParams)); ?>
+    </div>
+</div>
+
+
+
+<? if (!empty($this->parameterUnitsResult)) { ?>
+    <div class="table-responsive product-list">
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Název</td>
+                    <td>Zkratka</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->parameterUnitsResult as $parametrUnit) { ?>
+                    <tr>
+                        <td><?= $parametrUnit->getParameter_unit_id(); ?></td>
+                        <td>
+                            <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'parameterunit', 'action' => 'edit', 'id' => $parametrUnit->getParameter_unit_id()), null, true) ?>">
+                                <span class="product-list-name"><?= $parametrUnit->getParameter_unit_name() ?></span>
+                            </a>
+                        </td>
+                        <td><?= $parametrUnit->getParameter_unit_shortcut(); ?></td>
+                        <td class="action-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'parameterunit', 'action' => 'edit', 'id' => $parametrUnit->getParameter_unit_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'parameterunit', 'action' => 'delete', 'id' => $parametrUnit->getParameter_unit_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                <? } ?>
+            </tbody>
+        </table>
+    </div>
+<? } else { ?>
+    <h2>Ajéje...</h2>
+    <p>Nebyla nalezena žádná jednotka.</p>
+<? } ?>
+
+<?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/parameterunit/', 'urlParams' => $this->filterParams)); ?>
+
+

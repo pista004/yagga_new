@@ -1,0 +1,159 @@
+<?
+$products = array();
+
+if ($this->isRecommend) {
+    $products = $this->recommended_products;
+} else {
+    $products = $this->products;
+}
+?>
+
+
+<? if (!empty($products)) { ?>
+
+    <? if ($this->isRecommend) { ?>
+        <div class="row recommend-title">
+            <div class="col-md-12">
+                <h2 class="text-center">Doporučujeme</h2>
+            </div>
+            <hr />
+
+        </div>
+
+    <? } ?>
+
+    <div class="row">
+        <? foreach ($products as $product) { ?>
+            <? $variants = $this->variants; ?>
+
+
+            <div class="col-xs-6 col-sm-4 col-md-3 product-item">
+
+                <div class="product-item-img-wrap">
+                    <a href="<?= $this->url(array('detailurl' => $product->getProduct_url()), 'product_url', true) ?>">
+                        <span class="product-img">
+                            <? if (strpos($product->getMain_photography()->getPhotography_path(), 'http://') !== false) { ?>
+                                <img class="img-responsive" src="<?= $this->escape($product->getMain_photography()->getPhotography_path()); ?>" alt="<?= $this->escape($product->getProduct_name()); ?>" title="<?= $this->escape($product->getProduct_name()); ?>" />
+                            <? } else { ?>
+
+                                <? $listImagePath = IMAGE_UPLOAD_PATH . "/product_" . $this->escape($product->getProduct_id()) . "/list/" . $this->escape($product->getMain_photography()->getPhotography_path()); ?>
+
+                                <? if (file_exists($listImagePath)) { ?>
+
+                                    <img class="img-responsive" src="/images/upload/product_<?= $this->escape($product->getProduct_id()); ?>/list/<?= $this->escape($product->getMain_photography()->getPhotography_path()); ?>" alt="<?= $this->escape($product->getProduct_name()); ?>" title="<?= $this->escape($product->getProduct_name()); ?>" />
+
+                                <? } ?>
+
+                            <? } ?>
+                        </span>
+
+                    </a>
+
+
+                    <? if (!empty($variants[$product->getProduct_id()])) { ?>
+                        <div class="variants-list-wrap">
+                            <?= $this->variantsList($variants[$product->getProduct_id()], $this->url(array('detailurl' => $product->getProduct_url()), 'product_url', true)); ?>
+                        </div>
+                    <? } ?>
+
+
+                </div>
+
+
+
+
+
+
+
+                <a href="<?= $this->url(array('detailurl' => $product->getProduct_url()), 'product_url', true) ?>">
+
+                    <h4>
+
+                        <?= $this->escape($product->getProduct_price()); ?>&nbsp;Kč
+
+                        <? if ($product->getProduct_recommended_price()) { ?>
+                            <span class="product-original-price"><?= $product->getProduct_recommended_price() ?>&nbsp;Kč</span>
+
+                            <? $saleInfo = $this->saleInfo($product->getProduct_price(), $product->getProduct_recommended_price()); ?>
+
+                            <? if ($saleInfo > 0) { ?>
+                                <span class="sale-ico">-<?= $saleInfo; ?>%</span>
+                            <? } ?>
+
+                        <? } ?>
+                    </h4>
+
+                    <span class="product-stock"><?= $this->stockInfo($product->getProduct_stock()); ?></span>
+
+
+                    <? if ($product->getAffiliate_program()->getAffiliate_program_title()) { ?>
+                        <p class="product-affiliate-program-title"><?= $product->getAffiliate_program()->getAffiliate_program_title(); ?></p>
+                    <? } ?>
+
+                    <div class="product-item-title">
+
+                        <span class="product-name">
+                            <h3><?= $this->escape($product->getProduct_name()); ?></h3>
+                        </span>
+
+                    </div>
+
+
+                </a>
+
+
+                <!--
+
+        <span class="product-stock"><?= $this->stockInfo($product->getProduct_stock()); ?></span>
+
+        <h4>
+                <? if ($product->getProduct_recommended_price()) { ?>
+                                                                                                                                                                                                                    <span class="product-original-price"><?= $product->getProduct_recommended_price() ?> Kč</span>
+                <? } ?>
+
+                <?= $this->escape($product->getProduct_price()); ?> Kč</h4>
+                -->
+
+                <? /* if ($product->getProduct_stock() < 1) { ?>
+                  <span class="product-sold-out">Zboží již nelze objednat</span>
+                  <? } else { ?>
+                  <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+                  method="<?php echo $this->escape($this->form->getMethod()) ?>"
+                  class="add-to-cart-form"
+                  enctype="multipart/form-data">
+
+                  <?= $this->form->getElement('product_id')->setValue($product->getProduct_id()); ?>
+                  <?= $this->form->getElement('pieces'); ?>
+                  <?= $this->form->getElement('price')->setValue($product->getProduct_price()); ?>
+                  <?= $this->form->getElement('submit'); ?>
+
+                  <!--                        <a class="btn btn-default add-to-cart" href="">Vložit do košíku</a>-->
+                  </form>
+
+                  <? } */ ?>
+
+                <!--                    <a href="#" class="btn btn-default add-to-cart">Vložit do košíku</a>-->
+
+
+
+
+            </div>
+
+        <? } ?>
+
+    </div>
+
+
+<? } else { ?>
+    <? if ($this->isRecommend) { ?>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <i class="fa fa-frown-o fa-5x"></i>
+                <h2>Ajéje...</h2>
+                <p>Jsme smutní, nebyl nalezen žádný produkt. Zkuste zvolit jinou kategorii nebo nás kontaktujte.</p>
+                <p>Pokračovat můžete na <a href="/">hlavní stranu</a>.</p>
+            </div>
+        </div>
+    <? } ?>
+<? } ?>
+

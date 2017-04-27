@@ -1,0 +1,65 @@
+<h1>Faktury</h1>
+
+<? if (!empty($this->orders)) { ?>
+    <div class="table-responsive">
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>Faktura id</td>
+                    <td>Faktura č.</td>
+                    <td>Objednávka č.</td>
+                    <td>Jméno/Firma</td>
+                    <td>Vystaveno</td>
+                    <td>Splatnost</td>
+                    <td>Cena</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <?
+                foreach ($this->orders as $order) {
+                    if ($order->getOrder_invoice()->getInvoice_id()) {
+                        ?>
+                        <tr>
+                            <td>
+                                <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'invoice', 'action' => 'edit', 'id' => $order->getOrder_invoice()->getInvoice_id()), null, true) ?>" ><?= $order->getOrder_invoice()->getInvoice_id() ?></a>
+                            </td>
+                            <td>
+                                <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'invoice', 'action' => 'edit', 'id' => $order->getOrder_invoice()->getInvoice_id()), null, true) ?>" ><?= $order->getOrder_invoice()->getInvoice_number() ?></a>
+                            </td>
+                            <td>
+                                <?= $order->getOrder_number(); ?>
+                            </td>
+                            <td>
+                                <?= $order->getOrder_i_name(); ?> <?= $order->getOrder_i_surname(); ?><?= $order->getOrder_i_company() ? "/" . $order->getOrder_i_company() : ""; ?>
+                            </td>
+                            <td>
+                                <?= date("j. n. Y", $order->getOrder_invoice()->getInvoice_creating_date()); ?>
+                            </td>
+                            <td>
+                                <?= date("j. n. Y", $order->getOrder_invoice()->getInvoice_due_date()); ?>
+                            </td>
+                            <td>
+                                <?= $order->getOrder_sum_with_delivery_payment(); ?>
+                            </td>
+                            <td>
+                                <a class="btn btn-default" target="_blank" href="/invoices/<?= $order->getOrder_invoice()->getInvoice_path(); ?>?v=<?= time(); ?>"><span class="glyphicon glyphicon-file"></span> <?= $order->getOrder_invoice()->getInvoice_path(); ?></a>
+
+                            </td>
+                            <td class="action-buttons">
+                                <div class="btn-group">
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'invoice', 'action' => 'edit', 'id' => $order->getOrder_invoice()->getInvoice_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'invoice', 'action' => 'delete', 'id' => $order->getOrder_invoice()->getInvoice_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+<? } ?>

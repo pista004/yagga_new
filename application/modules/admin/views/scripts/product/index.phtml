@@ -1,0 +1,88 @@
+<h1>Produkty</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit Produkt</a>
+    </div>
+    <div class="col-md-4">
+        <form action="<?php echo $this->escape($this->formSearch->getAction()) ?>"
+              method="<?php echo $this->escape($this->formSearch->getMethod()) ?>"
+              enctype="multipart/form-data">
+            <div class="col-md-10">
+                <?= $this->formSearch->getElement('term'); ?>
+            </div>
+            <div class="col-md-2">
+                <?= $this->formSearch->getElement('submit'); ?>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-7">
+        <form action="<?php echo $this->escape($this->formFilter->getAction()) ?>"
+              method="<?php echo $this->escape($this->formFilter->getMethod()) ?>"
+              id="filter-form"
+              enctype="multipart/form-data">
+                  <? $formCategories = $this->formFilter->getCategories(); ?>
+                  <? if (!empty($formCategories)) {
+                      ?>
+                <div class="filter-item">
+                    <span class="filter-item-button">Kategorie</span>
+                    <div class="filter-wrap">
+                        <?= $this->formFilter->getDisplayGroup('categories'); ?>
+                        <div>
+                            <?= $this->formFilter->getElement('submit'); ?>
+                        </div>
+                    </div>
+                </div>
+            <? } ?>
+
+        </form>
+    </div>
+</div>
+
+
+<? if (!empty($this->activeFilterParams)) { ?>
+    <div class="row">
+        <span class="filter-label">Zvolené filtry:</span>
+        <? foreach ($this->activeFilterParams as $filterParam) { ?>
+            <span class="filter-selected">
+                <a href="<?= $filterParam['url'] ?>">
+                    <i class="fa fa-close"></i>
+                    <?= $filterParam['name'] ?>
+                </a>
+            </span>
+        <? } ?>
+    </div>
+<? } ?>
+
+
+<div class="row">
+    <div class="col-md-4 text-left product-count">
+        <p>Počet nalezených produktů: <?= $this->paginator->getTotalItemCount(); ?> </p>
+    </div>
+    <div class="col-md-8 text-right">
+        <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/product/', 'urlParams' => $this->filterParams)); ?>
+    </div>
+</div>
+
+
+
+<? if (!empty($this->productResult)) { ?>
+
+    <?php
+    echo $this->render('/product_list.phtml');
+    ?>
+
+
+<? } else { ?>
+    <h2>Ajéje...</h2>
+    <p>Nebyl nalezen žádný produkt.</p>
+<? } ?>
+
+<?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/product/', 'urlParams' => $this->filterParams)); ?>
+
+

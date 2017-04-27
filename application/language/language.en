@@ -1,0 +1,6 @@
+<?php
+
+return array(
+    Zend_Validate_NotEmpty::IS_EMPTY => "Hodnota musí být vyplněna!",
+    'EMPTY_FORM_FIELD' => "Field must be fill!",
+);

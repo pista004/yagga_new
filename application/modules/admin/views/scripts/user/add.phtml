@@ -1,0 +1,260 @@
+<div class="container">
+
+    <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+          method="<?php echo $this->escape($this->form->getMethod()) ?>"
+          id="edit-order-form"
+          enctype="multipart/form-data">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Přihlašovací údaje</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_login')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_login'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_password')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_password'); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Fakturační údaje</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_name')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_i_name'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_surname')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_i_surname'); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_phone')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_phone'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_street')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_i_street'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_city')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_i_city'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_zip_code')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-5">
+                                    <?= $this->form->getElement('user_profile_i_zip_code'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_country_id')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_i_country_id'); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_company')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_i_company'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_ico')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_i_ico'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_dic')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_i_dic'); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Doručovací adresa</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_d_name')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_d_name'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_d_surname')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_d_surname'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_d_company')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_d_company'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_d_street')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_d_street'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_d_city')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_d_city'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_d_zip_code')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-5">
+                                    <?= $this->form->getElement('user_profile_d_zip_code'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('user_profile_i_country_id')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('user_profile_i_country_id'); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <?= $this->form->getElement('user_newsletter')->getLabel(); ?>
+                            </div>
+                            <div class="col-lg-3">
+                                <?= $this->form->getElement('user_newsletter'); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><?= $this->form->getElement('user_profile_admin_note')->getLabel(); ?></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <?= $this->form->getElement('user_profile_admin_note'); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3">
+                <?= $this->form->getElement('submit'); ?>
+            </div>
+        </div> 
+
+    </form>
+
+</div>

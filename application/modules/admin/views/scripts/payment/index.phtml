@@ -1,0 +1,57 @@
+<div class="row">
+    <h1>Platba</h1>
+
+    <div classr="row">
+        <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'payment', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit platbu</a>
+    </div>
+
+    <? if (!empty($this->payments)) { ?>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Název</td>
+                        <td>Info</td>
+                        <td>Cena</td>
+                        <td>Limit</td>
+                        <td>Aktivní</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <? foreach ($this->payments as $payment) { ?>
+                        <tr>
+                            <td>
+                                <?= $payment->getPayment_id() ?>
+                            </td>
+                            <td>
+                                <?= $payment->getPayment_name() ?>
+                            </td>
+                            <td>
+                                <?= $payment->getPayment_info() ?>
+                            </td>
+                            <td>
+                                <?= $payment->getPayment_price_czk() ?>
+                            </td>
+                            <td>
+                                <?= $payment->getPayment_free_shipping_limit() ?>
+                            </td>
+                            <td>
+                                <?= $payment->getPayment_is_active() ?>
+                            </td>
+
+                            <td class="action-buttons">
+                                <div class="btn-group">
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'payment', 'action' => 'edit', 'id' => $payment->getPayment_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'payment', 'action' => 'delete', 'id' => $payment->getPayment_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                    <? } ?>
+                </tbody>
+            </table>
+        </div>
+    <? } ?>
+
+</div>

@@ -1,0 +1,41 @@
+<h1>Párování výrobců</h1>
+
+<? if ($this->manufacturerAffiliateResult) { ?>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Název affiliate výrobce</td>
+                        <td>Název výrobce</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <? foreach ($this->manufacturerAffiliateResult as $manufacturerAffiliate) { ?>
+                        <tr>
+                            <td>
+                                <?= $manufacturerAffiliate->getManufacturer_affiliate_manufacturer_id() ?>
+                            </td>
+                            <td>
+                                <?= $manufacturerAffiliate->getManufacturer_affiliate_manufacturer_name() ?>
+                            </td>
+                            <td>
+                                <? if ($manufacturerAffiliate->getManufacturer() instanceof Admin_Model_Manufacturer) { ?>
+                                    <?= $manufacturerAffiliate->getManufacturer()->getManufacturer_name(); ?>
+                                <? } ?>
+                            </td>
+                            <td class="action-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'manufactureraffiliate', 'action' => 'edit', 'id' => $manufacturerAffiliate->getManufacturer_affiliate_manufacturer_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                            </div>
+                        </td>
+                        </tr>
+                    <? } ?>
+
+                </tbody>
+            </table>
+
+        </div>
+<? } ?>

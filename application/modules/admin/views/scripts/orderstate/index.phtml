@@ -1,0 +1,42 @@
+<h1>Stavy objednávky</h1>
+
+<div classr="row">
+    <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'orderstate', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit stav</a>
+</div>
+
+<? if (!empty($this->orderStatesResult)) { ?>
+    <div class="table-responsive">
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Název</td>
+                    <td>Barva</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->orderStatesResult as $orderState) { ?>
+                    <tr>
+                        <td>
+                            <?= $orderState->getOrder_state_id() ?>
+                        </td>
+                        <td>
+                            <?= $orderState->getOrder_state_name() ?>
+                        </td>
+                        <td style="background-color: <?= $orderState->getOrder_state_color() ?>;">
+                            <?= $orderState->getOrder_state_color() ?>
+                        </td>
+                        <td class="action-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'orderstate', 'action' => 'edit', 'id' => $orderState->getOrder_state_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'orderstate', 'action' => 'delete', 'id' => $orderState->getOrder_state_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                <? } ?>
+            </tbody>
+        </table>
+    </div>
+<? } ?>

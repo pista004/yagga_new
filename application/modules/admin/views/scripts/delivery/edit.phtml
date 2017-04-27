@@ -1,0 +1,95 @@
+<div class="container">
+    <div class="row">
+        <h1>Editace dopravy</h1>
+
+        <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+              method="<?php echo $this->escape($this->form->getMethod()) ?>"
+              id="add-product-form"
+              class="include-image-upload"
+              enctype="multipart/form-data">
+
+            <? $element = $this->form; ?>
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_name')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_name'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_info')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_info'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_note')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_note'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_price_czk')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_price_czk'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_free_shipping_limit')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_free_shipping_limit'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_is_address')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_is_address'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_is_active')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_is_active'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('delivery_payments')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <div class="checkbox">
+                        <?= $element->getElement('delivery_payments'); ?>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('submit'); ?>
+                </div>
+            </div>   
+        </form>
+    </div>
+</div>

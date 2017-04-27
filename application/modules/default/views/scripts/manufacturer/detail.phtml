@@ -1,0 +1,81 @@
+<div class="manufacturer-detail page-wrap">
+    <div class="container manufacturer-detail-wrap">
+
+        <div class="row manufacturer-detail-head">
+            <? if ($this->manufacturer->getManufacturer_photography()->getPhotography_id()) { ?>
+                <img class="img-responsive" src="/images/upload_manufacturer/manufacturer_<?= $this->manufacturer->getManufacturer_id() ?>/<?= $this->manufacturer->getManufacturer_photography()->getPhotography_path(); ?>" alt="<?= $this->manufacturer->getManufacturer_name(); ?>" title="<?= $this->manufacturer->getManufacturer_name(); ?>" />
+            <? } ?>
+
+            <h1><?= $this->manufacturer->getManufacturer_name(); ?></h1>
+        </div>
+
+        <? if ($this->manufacturer->getManufacturer_note()) { ?>
+            <div class="row manufacturer-note">
+                <?= $this->manufacturer->getManufacturer_note(); ?>
+            </div>
+        <? } ?>
+
+
+
+        <? if (!empty($this->mCategories)) { ?>
+            <div class="row">
+                <p class="text-center">Značku <strong><?= $this->manufacturer->getManufacturer_name(); ?></strong> naleznete v těchto kategoriích:</p>
+            </div>    
+
+            <div class="row manufacturer-detail-categories">
+
+                <ul>
+                    <? foreach ($this->mCategories as $category) { ?>
+                        <li>
+                            <a href="<?= $category->getCategory_url(); ?>">
+
+                                <?= $category->getCategory_h1() != "" ? $category->getCategory_h1() : $category->getCategory_name(); ?> <?= $this->manufacturer->getManufacturer_name(); ?></a>
+                        </li>
+                    <? } ?>
+                </ul>
+
+            </div>
+        <? } ?>
+
+
+
+
+        <? if (!empty($this->products)) { ?>
+
+
+            <div class="product-list">
+
+                <div class="row product-list-wrap">
+
+
+                    <div class="row">
+                        <div class="col-md-4 text-left product-count">
+                            <p>Počet nalezených produktů <strong><?= $this->manufacturer->getManufacturer_name() ?></strong>: <?= $this->paginator->getTotalItemCount(); ?> </p>
+                        </div>
+                        <div class="col-md-8 text-right">
+                            <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => $this->urlManufacturer)); ?>
+                        </div>
+                    </div>
+
+                    <?php echo $this->render('/product_list.phtml'); ?>
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => $this->urlManufacturer)); ?>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+        <? } ?>
+
+
+    </div>
+</div>

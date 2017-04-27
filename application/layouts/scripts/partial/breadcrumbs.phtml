@@ -1,0 +1,14 @@
+<?
+$options = $this->navigation()->findOneByLabel('Main')->toArray();
+
+?>
+<p>Úvodní stránka > 
+
+<?
+    foreach($options['pages'] as $page){
+        if($page['active'])
+        echo $page['label'];
+    }
+?>
+
+</p>

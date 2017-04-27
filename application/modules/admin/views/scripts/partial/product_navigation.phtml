@@ -1,0 +1,22 @@
+
+<ul class="nav nav-tabs" role="tablist">
+    <? if ($this->product->getProduct_itemgroup_product_id()) { ?>
+        <div class="variant-step-back">
+            <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'index', 'product_id' => $this->escape($this->product->getProduct_itemgroup_product_id())), null, true) ?>">
+                <i class="fa fa-reply" aria-hidden="true"></i> Zpět na přehled variant
+            </a>
+        </div>
+        <li <? if ($this->active_nav == "variant") { ?>class="active" <? } ?>><a href="<? if ($this->active_nav == "variant") { ?>#<? } else { ?><?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'edit', 'id' => $this->escape($this->product->getProduct_id())), null, true) ?><? } ?>">Varianta</a></li>
+        <li <? if ($this->active_nav == "parameter") { ?>class="active" <? } ?>><a href="<? if ($this->active_nav == "parameter") { ?>#<? } else { ?><?= $this->url(array('module' => 'admin', 'controller' => 'productparameter', 'action' => 'edit', 'id' => $this->escape($this->product->getProduct_id())), null, true) ?><? } ?>">Parametry</a></li>
+        <li <? if ($this->active_nav == "photography") { ?>class="active" <? } ?>><a href="<? if ($this->active_nav == "photography") { ?>#<? } else { ?><?= $this->url(array('module' => 'admin', 'controller' => 'photography', 'action' => 'edit', 'id' => $this->escape($this->product->getProduct_id())), null, true) ?><? } ?>">Fotografie</a></li>
+
+    <? } else { ?>
+
+        <li <? if ($this->active_nav == "product") { ?>class="active" <? } ?>><a href="<? if ($this->active_nav == "product") { ?>#<? } else { ?><?= $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'edit', 'id' => $this->escape($this->product->getProduct_id())), null, true) ?><? } ?>">Produkt</a></li>
+        <li <? if ($this->active_nav == "parameter") { ?>class="active" <? } ?>><a href="<? if ($this->active_nav == "parameter") { ?>#<? } else { ?><?= $this->url(array('module' => 'admin', 'controller' => 'productparameter', 'action' => 'edit', 'id' => $this->escape($this->product->getProduct_id())), null, true) ?><? } ?>">Parametry</a></li>
+        <li <? if ($this->active_nav == "variant") { ?>class="active" <? } ?>><a href="<? if ($this->active_nav == "variant") { ?>#<? } else { ?><?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'index', 'product_id' => $this->escape($this->product->getProduct_id())), null, true) ?><? } ?>">Varianty <? if($this->product->getVariants_count() > 0){ echo '<span class="badge">'. $this->product->getVariants_count(). '</span>';} ?></a></li>
+        <li <? if ($this->active_nav == "photography") { ?>class="active" <? } ?>><a href="<? if ($this->active_nav == "photography") { ?>#<? } else { ?><?= $this->url(array('module' => 'admin', 'controller' => 'photography', 'action' => 'edit', 'id' => $this->escape($this->product->getProduct_id())), null, true) ?><? } ?>">Fotografie</a></li>
+        <!-- <li <? if ($this->active_nav == "recommend") { ?>class="active" <? } ?>><a href="<? if ($this->active_nav == "recommend") { ?>#<? } else { ?><?= $this->url(array('module' => 'admin', 'controller' => 'recommend', 'action' => 'edit', 'id' => $this->escape($this->product->getProduct_id())), null, true) ?><? } ?>">Doporučujeme</a></li> -->
+
+    <? } ?>
+</ul>

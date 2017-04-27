@@ -1,0 +1,291 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle($this->headTitle . ' | Yagga.cz');
+echo $this->doctype('HTML5');
+?>
+
+<html lang="en">
+    <head>    
+        <? $this->headMeta()->setName('description', $this->metaDescription); ?>
+        <? $this->headMeta()->setName('robots', 'all, index, follow'); ?>
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headTitle(); ?>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+
+        <!-- facebook meta image -->
+        <? if ($this->facebookImageUrl) { ?>
+            <meta property="og:image" content="<?= $this->facebookImageUrl ?>"/>
+            <link rel="image_src" type="image/jpeg" href="<?= $this->facebookImageUrl ?>" />
+        <? } ?>
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+
+        <link rel="shortcut icon" href="/images/default/favico.ico" />
+
+        <!-- canonical pages -->
+        <? if ($this->canonicalPage) { ?>
+            <link rel="canonical" href="<?= $this->canonicalPage ?>" />
+        <? } ?>
+        <?php echo $this->headLink(); ?>
+        <?php /* echo $this->jQuery()->enable(); */ ?>
+
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-57765949-1', 'auto');
+            ga('require', 'linkid', 'linkid.js');
+            ga('require', 'displayfeatures');
+            ga('send', 'pageview');
+
+        </script>
+
+
+        <!--Start of Zopim Live Chat Script-->
+        <!--
+        <script type="text/javascript">
+            window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+                    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+                        _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+                $.src='//v2.zopim.com/?2gphzLiHEWUWH8qGQn57WibXC0ZQaDE3';z.t=+new Date;$.
+                    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+        </script>
+        --->
+        <!--End of Zopim Live Chat Script-->
+
+
+        <!--Start of Facebook remarketing Script-->
+        <script>(function() {
+            var _fbq = window._fbq || (window._fbq = []);
+            if (!_fbq.loaded) {
+                var fbds = document.createElement('script');
+                fbds.async = true;
+                fbds.src = '//connect.facebook.net/en_US/fbds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(fbds, s);
+                _fbq.loaded = true;
+            }
+            _fbq.push(['addPixelId', '749061731852880']);
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(['track', 'PixelInitialized', {}]);
+        </script>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=749061731852880&amp;ev=PixelInitialized" /></noscript>
+    <!--End of Facebook remarketing Script-->
+
+
+    <!-- google map and google marker clusterer -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="/js/plugins/google-marker-clusterer/src/markerclusterer.js"></script>
+
+    <script>
+    function initialize() {
+        var center = new google.maps.LatLng(49.512173, 15.441954);
+
+        var data = <?= $this->latLngJson; ?>;
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 7,
+            center: center,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel: false
+        });
+        
+        var markers = [];
+        $.each(data, function(i, item) {
+            var latLng = new google.maps.LatLng(item.latitude, item.longitude);
+            var marker = new google.maps.Marker({
+                position: latLng,
+                icon: '/images/default/kisssender/kiss-mouth-m1.png'
+            });
+            markers.push(marker);
+        });
+        
+        var clusterStyles = [
+            {
+                textColor: 'white',
+                url: '/images/default/kisssender/kiss-mouth-m1.png',
+                height: 50,
+                width: 50
+            },
+        ];
+
+        var mcOptions = {
+            gridSize: 20,
+            styles: clusterStyles,
+            maxZoom: 21
+        };
+        
+        var markerCluster = new MarkerClusterer(map, markers, mcOptions);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+    <!-- end google map and google marker clusterer -->
+
+
+
+</head>
+<body id="kissender-sendkiss">
+
+
+    <!-- obsah -->
+
+    <div class="row" id="sendkiss">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-5">
+                <a href="/"><img alt="yagga" src="/images/default/yagga-square-120.png"></a>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-7">
+                <ul class="list-inline social-buttons">
+                    <li><a target="_blank" href="http://www.facebook.com/yaggacz" class="facebook"><i class="fa fa-facebook fa-2x"></i></a></li>
+                    <li><a target="_blank" href="http://www.instagram.com/yagga.cz" class="instagram"><i class="fa fa-instagram fa-2x"></i></a></li>
+                    <li><a target="_blank" href="https://www.youtube.com/channel/UC2zjPieb4gA8VGOKFG620AA" class="youtube"><i class="fa fa-youtube fa-2x"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <div class="kiss-hearts-section">
+                    <div class="kiss-hearts-wrap">
+                        <div class="hearts"></div>
+                        <div class="arrow-wrap">
+                            <a class="arrow-text" href="/poslipusinku/formular">klikni a pošli pusinku</a>
+                            <span class="arrow"></span>
+                        </div>
+                        <a class="btn-send-kiss" href="/poslipusinku/formular"></a>
+        <!--                <img alt="yagga" class="img-responsive" src="/images/default/kisssender/kiss-mouth.png">-->
+                    </div>
+                    <h1>Pošli pusinku</h1>
+                </div>
+            </div>
+
+        </div>
+        <div class="row about-button">
+            <a href="#about-section">
+                <span>O co jde?</span>
+                <i class="fa fa-angle-down"></i>
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="row" id="num-section">
+        <div class="container">
+            <div class="col-md-4">
+                <h3 class="num-title">Odeslaných pusinek</h3>
+                <h3 class="num-num"><span class="numscroller" data-max="<?= $this->kissCount ?>" data-min="0" data-increment="3" data-delay="3">0</span></h3>
+            </div>
+
+            <div class="col-md-4">
+                <h3 class="num-title">Odesílatelů</h3>
+                <h3 class="num-num"><span class="numscroller" data-max="<?= $this->ipAddressCount; ?>" data-min="0" data-increment="2" data-delay="3"><?= $this->ipAddressCount; ?></span></h3>
+            </div>
+
+            <div class="col-md-4">
+                <h3 class="num-title">Míra radosti</h3>
+                <h3 class="num-num">Nepočitatelná</h3>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row" id="about-section">
+        <div class="container">
+
+            <div class="row">
+                <h2>O co jde?</h2>
+                <p>
+                    Jedná se o originální elektronickou pusinku se vzkazem, který sami napíšete a pošlete do emailové schránky svému známému, příteli, přítelkyni, mamince, tatínkovi, babičce, prostě komu budete chtít.
+                </p>
+
+                <p>
+                    Projekt Pošli pusinku slouží především k šíření lásky, pozitivní energie a hlavně radosti. Jedná se o zcela bezplatnou službu, kterou může využít každý člověk na naší krásné, modré, kulaté planetě.
+                </p>
+
+                <p>
+                    Nevíte jaký dát dárek přítelkyni k Valentýnovi? Přítel bude mít narozeniny a vy stále nevíte čím ho potěšíte? Zapomněli jste na něčí narozeniny nebo svátek a potřebujete hned něco originálního? Pošlete pusinku, připojte originální vzkaz a určitě sklidíte úspěch.
+                </p>
+            </div>
+
+
+            <div class="row">
+                <h2>Jak to funguje?</h2>
+                <ul>
+                    <li>
+                        <p>
+                            Klikněte výše na pusinku nebo rovnou přejděte na <a target="_blank" href="/poslipusinku/formular">www.yagga.cz/poslipusinku/formular</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Do formuláře napište své jméno, text vzkazu a email příjemce. Pokud vyplníte i svůj email, souhlasíte tím se zasíláním newsletterů z internetového obchodu www.yagga.cz. Klikněte na tlačítko odeslat.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Příjemce obdrží email s pusinkou a odkazem pro vyzvednutí vzkazu.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Příjemce v emailu klikne na tlačítko "vyzvednout" pro přečtení Vašeho vzkazu.
+                        </p>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="row" id="map-section">
+        <h2><i class="fa fa-crosshairs"></i> Pusinkový lokátor</h2>
+        <div id="map-container"><div id="map"></div></div>
+    </div>
+
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <h3>Sledujte nás</h3>
+                    <ul class="list-inline social-buttons">
+                        <li><a target="_blank" href="http://www.facebook.com/yaggacz" class="facebook"><i class="fa fa-facebook fa-2x"></i></a></li>
+                        <li><a target="_blank" href="http://www.instagram.com/yagga.cz" class="instagram"><i class="fa fa-instagram fa-2x"></i></a></li>
+                        <li><a target="_blank" href="https://www.youtube.com/channel/UC2zjPieb4gA8VGOKFG620AA" class="youtube"><i class="fa fa-youtube fa-2x"></i></a></li>
+                    </ul>
+                    <p>Yagga.cz © 2014</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <?php
+    $this->jQuery()->enable();
+    echo $this->jQuery();
+    ?>
+
+
+    <!-- jqery numscroller -->
+    <script type="text/javascript" src="/js/plugins/numscroller/numscroller-1.0.js"></script>
+    <!-- end jqery numscroller -->
+
+</body>
+</html>

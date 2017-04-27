@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        <h1>Editace platby</h1>
+
+        <? if (!empty($this->order)) { ?>
+            <div class="col-lg-6">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                            <tr>
+                                <th>Platba</th>
+                                <td><?= $this->order->getOrder_payment_name(); ?></td>
+                            </tr>
+                            <tr>
+                                <th>Cena</th>
+                                <td><?= $this->order->getOrder_payment_price(); ?> Kč</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+                      method="<?php echo $this->escape($this->form->getMethod()) ?>"
+                      id="edit-orderpayment-form"
+                      enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-3 text-right">
+                            <?= $this->form->getElement('order_payment_id')->getLabel(); ?>
+                        </div>
+                        <div class="col-lg-6">
+                            <?= $this->form->getElement('order_payment_id'); ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 text-right">
+                            <?= $this->form->getElement('order_payment_price')->getLabel(); ?>
+                        </div>
+                        <div class="col-lg-6">
+                            <?= $this->form->getElement('order_payment_price'); ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-lg-offset-3">
+                            <?= $this->form->getElement('submit'); ?>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        <? } ?>
+
+    </div>
+</div>

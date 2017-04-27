@@ -1,0 +1,112 @@
+<div class="container">
+    <div class="row">
+        <h1>Vložení článku</h1>
+
+        <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+              method="<?php echo $this->escape($this->form->getMethod()) ?>"
+              id="add-article-form"
+              enctype="multipart/form-data">
+
+            <? $element = $this->form; ?>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_article_type_id')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_article_type_id'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('file')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('file'); ?>
+                </div>
+            </div>
+            
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_active_from_date')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_active_from_date'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_name')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_name'); ?>
+                </div>
+            </div>
+            
+                        <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_perex')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('article_perex'); ?>
+                </div>
+            </div>
+            
+                        <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_text')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('article_text'); ?>
+                </div>
+            </div>
+            
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_url')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_url'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_seo_title')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_seo_title'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_seo_meta_description')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('article_seo_meta_description'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_is_active')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('article_is_active'); ?>
+                </div>
+            </div>
+            
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('submit'); ?>
+                </div>
+            </div>   
+        </form>
+    </div>
+</div>

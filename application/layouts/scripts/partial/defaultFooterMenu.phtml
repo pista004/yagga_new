@@ -1,0 +1,42 @@
+<?
+$options = $this->navigation()->findOneByLabel('Default_footer')->toArray();
+?>
+
+<h3>Užitečné informace</h3>
+<ul>
+    <? foreach ($options['pages'] as $page1) { ?>        
+        <li class="dropdown">
+            <a href="<?= $page1['uri'] ?>" class="dropdown-toggle disabled" data-toggle="dropdown" role="button" aria-expanded="false">
+                <span><?= $page1['label'] ?> </span>
+                <? if (!empty($page1['pages'])) { ?>
+                    <i class="fa fa-angle-down"></i>
+                <? } ?>
+            </a>
+            <? if (!empty($page1['pages'])) { ?>
+                <ul class="dropdown-menu" role="menu">
+                    <? foreach ($page1['pages'] as $page2) { ?>        
+                        <li>
+                            <a href="<?= $page2['uri'] ?>">
+                                <span><?= $page2['label'] ?></span>
+                            </a>
+                            <? if (!empty($page2['pages'])) { ?>
+                                <ul>
+                                    <? foreach ($page2['pages'] as $page3) { ?>        
+                                        <li>
+                                            <a href="<?= $page3['uri'] ?>">
+                                                <span><?= $page3['label'] ?></span>
+                                            </a>
+                                            <? if (!empty($page3['pages'])) { ?>
+
+                                            <? } ?>
+                                        </li>
+                                    <? } ?>
+                                </ul>
+                            <? } ?>
+                        </li>
+                    <? } ?>
+                </ul>
+            <? } ?>
+        </li>
+    <? } ?>
+</ul>

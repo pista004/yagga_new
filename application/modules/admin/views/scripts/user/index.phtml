@@ -1,0 +1,60 @@
+<h1>Zákazníci</h1>
+
+<a href="<?= $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit zákazníka</a>
+
+
+<? if (!empty($this->userProfiles)) { ?>
+    <div class="table-responsive">
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>Jméno a příjmení</td>
+                    <td>Ulice</td>
+                    <td>PSČ</td>
+                    <td>Město</td>
+                    <td>Email</td>
+                    <td>Počet objednávek</td>
+                    <td>Aktivní</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <?
+                foreach ($this->userProfiles as $userProfile) {
+                    ?>
+                    <tr>
+                        <td>
+                            <?= $userProfile->getUser_profile_i_name(); ?> <?= $userProfile->getUser_profile_i_surname(); ?>
+                        </td>
+                        <td>
+                            <?= $userProfile->getUser_profile_i_street(); ?>
+                        </td>
+                        <td>
+                            <?= $userProfile->getUser_profile_i_zip_code(); ?>
+                        </td>
+                        <td>
+                            <?= $userProfile->getUser_profile_i_city(); ?>
+                        </td>
+                        <td>
+                            <?= $userProfile->getUser_profile_user()->getUser_login(); ?>
+                        </td>
+                        <td>
+                        </td>
+                        <td>
+                            <?= $userProfile->getUser_profile_user()->getUser_is_active(); ?>
+                        </td>
+                        <td class="action-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'edit', 'id' => $userProfile->getUser_profile_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'delete', 'id' => $userProfile->getUser_profile_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                    <?
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+<? } ?>

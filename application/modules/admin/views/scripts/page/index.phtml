@@ -1,0 +1,46 @@
+
+<div class="row">
+    <h1>Stránky</h1>
+
+    <div classr="row">
+        <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'page', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit stránku</a>
+    </div>
+
+    <? if (!empty($this->pages)) { ?>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Název</td>
+                        <td>Aktivní</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <? foreach ($this->pages as $page) { ?>
+                        <tr>
+                            <td>
+                                <?= $page->getPage_id() ?>
+                            </td>
+                            <td>
+                                <?= $page->getPage_name() ?>
+                            </td>
+                            <td>
+                                <?= $page->getPage_is_active() ?>
+                            </td>
+
+                            <td class="action-buttons">
+                                <div class="btn-group">
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'page', 'action' => 'edit', 'id' => $page->getPage_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'page', 'action' => 'delete', 'id' => $page->getPage_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                    <? } ?>
+                </tbody>
+            </table>
+        </div>
+    <? } ?>
+
+</div>

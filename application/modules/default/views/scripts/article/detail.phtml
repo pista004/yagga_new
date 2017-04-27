@@ -1,0 +1,19 @@
+
+<div class="article-detail page-wrap">
+    <div class="container article-detail-wrap">
+
+        <div class="row">
+            <h1><?= $this->article->getArticle_name(); ?></h1>
+
+            <? if ($this->article->getArticle_photography()->getPhotography_id()) { ?>
+                <img class="img-responsive" src="/images/upload_article/article_<?= $this->article->getArticle_id() ?>/main/<?= $this->article->getArticle_photography()->getPhotography_path(); ?>" />
+            <? } ?>
+            <p class="article-date"><?= date('j. n. Y', $this->article->getArticle_active_from_date()); ?></p>
+            <div class="article-perex"><?= $this->article->getArticle_perex(); ?></div>
+            <div class="article-text"><?= $this->article->getArticle_text(); ?></div>
+        </div>
+
+    </div>
+</div>
+
+

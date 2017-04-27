@@ -1,0 +1,85 @@
+<? if (!empty($this->recommended_products)) { ?>
+
+    <div class="recommend">
+        <div class="container recommend-wrap">
+            <div class="row recommend-title">
+                <div class="col-md-12">
+                    <h2 class="text-center">Doporučujeme</h2>
+                </div>
+                <hr />
+
+            </div>
+            <div class="row">
+                <? foreach ($this->recommended_products as $recommended_product) { ?>
+
+                    <div class="col-xs-6 col-sm-4 col-md-3 recommend-item">
+
+                        <div class="recommend-item-img-wrap">
+                            <a href="<?= $recommended_product->getProduct_affiliate_url(); ?>" target="_blank" rel="nofollow">
+                                <span class="recommend-img">
+                                    <? if (strpos($recommended_product->getMain_photography()->getPhotography_path(), 'http://') !== false) { ?>
+                                        <img class="img-responsive" src="<?= $this->escape($recommended_product->getMain_photography()->getPhotography_path()); ?>" alt="<?= $this->escape($recommended_product->getProduct_name()); ?>" title="<?= $this->escape($recommended_product->getProduct_name()); ?>" />
+                                    <? } else { ?>
+
+                                        <img class="img-responsive" src="/images/upload/product_<?= $this->escape($recommended_product->getProduct_id()); ?>/list/<?= $this->escape($recommended_product->getMain_photography()->getPhotography_path()); ?>" alt="<?= $this->escape($recommended_product->getProduct_name()); ?>" title="<?= $this->escape($recommended_product->getProduct_name()); ?>" />
+                                    <? } ?>
+                                </span>
+                            </a>
+                            
+                            <div class="product-item-detail-url">
+                                <a href="<?= $this->url(array('detailurl' => $recommended_product->getProduct_url()), 'product_url', true) ?>">Přejít na detail</a>
+                            </div> 
+                            
+                        </div>
+
+                        <a href="<?= $recommended_product->getProduct_affiliate_url(); ?>" target="_blank" rel="nofollow">
+
+
+                            <h4>
+                                <?= $this->escape($recommended_product->getProduct_price()); ?>&nbsp;Kč
+                                <? if ($recommended_product->getProduct_recommended_price() > $recommended_product->getProduct_price()) { ?>
+                                    <span class="recommend-product-original-price"><?= $recommended_product->getProduct_recommended_price() ?>&nbsp;Kč</span>
+
+                                    <? $saleInfo = $this->saleInfo($recommended_product->getProduct_price(), $recommended_product->getProduct_recommended_price()); ?>
+
+                                    <? if ($saleInfo > 0) { ?>
+                                        <span class="sale-ico">-<?= $saleInfo; ?>%</span>
+                                    <? } ?>
+
+                                <? } ?>
+
+                            </h4>
+                            
+                            <? if ($recommended_product->getAffiliate_program()->getAffiliate_program_title()) { ?>
+                                <p class="recommend-affiliate-program-title"><?= $recommended_product->getAffiliate_program()->getAffiliate_program_title(); ?></p>
+                            <? } ?>
+
+                            <div class="recommend-product-item-title">
+
+                                <span class="recommend-product-name">
+                                    <h3><?= $this->escape($recommended_product->getProduct_name()); ?></h3>
+                                </span>
+
+                            </div>
+
+
+                        </a>
+
+
+                        <!--
+                        <span class="recommend-stock"><?= $this->stockInfo($recommended_product->getProduct_stock()); ?></span>
+                        -->
+
+
+
+                        <!--                        <a href="#" class="btn btn-default add-to-cart">Vložit do košíku</a>-->
+                    </div>
+
+                <? } ?>
+            </div>
+        </div>
+    </div>
+
+    <?php /* echo $this->render('/cart_modal.phtml'); */ ?>
+
+<? } ?>

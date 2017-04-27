@@ -1,0 +1,66 @@
+<!-- Modal cart -->
+<div class="modal fade" id="cart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Zavřít</span></button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-check"></i> Úspěšně vloženo do nákupního košíku</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Právě vloženo do košíku</h2>
+                        <div class="product-detail">
+                            <span class="product-detail-img-thumb">
+                                <img class="img-responsive" src="" alt="" />
+                            </span>
+                            <span class="product-info">
+                                <h1 class="product-name"><span class="added-pieces"><?= $this->escape($this->pieces) ?></span>x <span class="added-name"><?= $this->escape($this->name) ?></span><? if($this->variant_name != ''){ ?><span class="variant-name"> <?= $this->escape($this->variant_name) ?></span><? } ?></h1>
+                                
+                                <p class="product-price"><span><?= $this->escape($this->price) ?></span></p>   
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 cart-wrap">
+                        <h2>Obsah košíku</h2>
+                        <p class="cart-pieces"><span><?= $this->escape($this->count) ?></span> ks, celkem za <span class="cart-amount"><?= $this->escape($this->amount) ?></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-6 text-left">
+                    <button type="button" class="btn btn-default btn-modal-back" data-dismiss="modal"><i class="fa fa-angle-left"></i>Pokračovat v nákupu</button>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="<?= $this->url(array('controller' => 'kosik', 'action' => 'index'), 'default', true) ?>" class="btn btn-primary btn-modal-cart">Přejít do košíku <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal cart -->
+<div class="modal fade" id="variant-error-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Zavřít</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3 class="text-center">Nejprve prosím vyberte variantu.</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-default btn-modal-back" data-dismiss="modal">Pokračovat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

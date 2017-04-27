@@ -1,0 +1,95 @@
+<h1>Úprava výrobce</h1>
+
+<div class="container">
+    <div class="row">
+        <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+              method="<?php echo $this->escape($this->form->getMethod()) ?>"
+              enctype="multipart/form-data">
+
+            <? $element = $this->form; ?>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_name')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_name'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_url')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_url'); ?>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('file')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+
+                    <? if (is_object($this->manufacturer->getManufacturer_photography()) && $this->manufacturer->getManufacturer_photography()->getPhotography_id()) { ?>
+                        <img style="width: 80px;" src="/images/upload_manufacturer/manufacturer_<?= $this->manufacturer->getManufacturer_id() ?>/<?= $this->manufacturer->getManufacturer_photography()->getPhotography_path(); ?>" />
+                        <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'photography', 'action' => 'delete', 'id' => $this->escape($this->manufacturer->getManufacturer_photography()->getPhotography_id()), 'manufacturer_id' => $this->escape($this->manufacturer->getManufacturer_id())), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                        <div style="visibility: hidden;">      <?= $element->getElement('file'); ?></div>
+
+                    <? } else { ?>
+                        <?= $element->getElement('file'); ?>
+                    <? } ?>
+
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_note')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('manufacturer_note'); ?>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_seo_title')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('manufacturer_seo_title'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_seo_meta_description')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('manufacturer_seo_meta_description'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_is_active')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_is_active'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('submit'); ?>
+                </div>
+            </div>   
+        </form>
+    </div>
+</div>

@@ -1,0 +1,249 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle($this->headTitle . ' | Yagga.cz');
+echo $this->doctype('HTML5');
+?>
+
+<html lang="en">
+    <head>    
+        <? $this->headMeta()->setName('description', $this->metaDescription); ?>
+        <? $this->headMeta()->setName('robots', 'all, index, follow'); ?>
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headTitle(); ?>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+
+        <!-- facebook meta image -->
+        <? if ($this->facebookImageUrl) { ?>
+            <meta property="og:image" content="<?= $this->facebookImageUrl ?>"/>
+            <link rel="image_src" type="image/jpeg" href="<?= $this->facebookImageUrl ?>" />
+        <? } ?>
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+
+        <link rel="shortcut icon" href="/images/default/favico.ico" />
+
+        <!-- canonical pages -->
+        <? if ($this->canonicalPage) { ?>
+            <link rel="canonical" href="<?= $this->canonicalPage ?>" />
+        <? } ?>
+        <?php echo $this->headLink(); ?>
+        <?php /* echo $this->jQuery()->enable(); */ ?>
+
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-57765949-1', 'auto');
+            ga('require', 'linkid', 'linkid.js');
+            ga('require', 'displayfeatures');
+            ga('send', 'pageview');
+
+        </script>
+
+
+        <!--Start of Zopim Live Chat Script-->
+        <!--
+        <script type="text/javascript">
+            window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+                    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+                        _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+                $.src='//v2.zopim.com/?2gphzLiHEWUWH8qGQn57WibXC0ZQaDE3';z.t=+new Date;$.
+                    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+        </script>
+        --->
+        <!--End of Zopim Live Chat Script-->
+
+
+        <!--Start of Facebook remarketing Script-->
+        <script>(function() {
+            var _fbq = window._fbq || (window._fbq = []);
+            if (!_fbq.loaded) {
+                var fbds = document.createElement('script');
+                fbds.async = true;
+                fbds.src = '//connect.facebook.net/en_US/fbds.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(fbds, s);
+                _fbq.loaded = true;
+            }
+            _fbq.push(['addPixelId', '749061731852880']);
+        })();
+        window._fbq = window._fbq || [];
+        window._fbq.push(['track', 'PixelInitialized', {}]);
+        </script>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=749061731852880&amp;ev=PixelInitialized" /></noscript>
+    <!--End of Facebook remarketing Script-->
+
+
+</head>
+<body id="kissender-sendkiss">
+
+    <!-- obsah -->
+
+    <div class="row sendkiss-form" id="sendkiss">
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-5">
+                <a href="/"><img alt="yagga" src="/images/default/yagga-square-120.png"></a>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-7">
+                <ul class="list-inline social-buttons">
+                    <li><a target="_blank" href="http://www.facebook.com/yaggacz" class="facebook"><i class="fa fa-facebook fa-2x"></i></a></li>
+                    <li><a target="_blank" href="http://www.instagram.com/yagga.cz" class="instagram"><i class="fa fa-instagram fa-2x"></i></a></li>
+                    <li><a target="_blank" href="https://www.youtube.com/channel/UC2zjPieb4gA8VGOKFG620AA" class="youtube"><i class="fa fa-youtube fa-2x"></i></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+            <? if ($this->errorFlashMessage || $this->infoFlashMessage) { ?>
+                <div class="container-wrap-messages">
+                    <? if ($this->errorFlashMessage) { ?>
+                        <div class="alert alert-danger"><a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a><?= $this->errorFlashMessage; ?></div>
+                    <? } ?>
+                    <? if ($this->infoFlashMessage) { ?>
+                        <div class="alert alert-success"><a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a><?= $this->infoFlashMessage; ?></div>
+                    <? } ?>
+                </div>
+            <? } ?>
+
+
+
+
+
+
+            <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+                  method="<?php echo $this->escape($this->form->getMethod()) ?>"
+                  id="order-form"
+                  enctype="multipart/form-data">
+
+
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <h1>Pošli pusinku a vzkaz</h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <p class="info-text">Vaše jméno, text vzkazu a email příjemce jsou povinné položky, které musí být vyplněny pro úspěšné odeslání pusinky a vzkazu. Pokud souhlasíte se zasíláním newsletterů z internetového obchodu www.yagga.cz, vyplňte i email odesílatele.</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="row form-item">
+                            <?= $this->form->getElement('kisssender_sender_name')->getLabel(); ?>
+                            <?= $this->form->getElement('kisssender_sender_name'); ?>
+                        </div>
+                        <div class="row form-item">
+                            <?= $this->form->getElement('kisssender_text')->getLabel(); ?>
+                            <?= $this->form->getElement('kisssender_text'); ?>
+                        </div>
+                        <div class="row form-item">
+                            <?= $this->form->getElement('kisssender_email_to')->getLabel(); ?>
+                            <?= $this->form->getElement('kisssender_email_to'); ?>
+                        </div>
+                        <div class="row form-item">
+                            <?= $this->form->getElement('kisssender_email_from')->getLabel(); ?>
+                            <?= $this->form->getElement('kisssender_email_from'); ?>
+                        </div>
+                        <div class="row form-item text-center">
+                            <?= $this->form->getElement('submit'); ?>
+                        </div> 
+                    </div>
+                </div>
+
+
+                <?= $this->form->getElement('kisssender_latitude'); ?>
+                <?= $this->form->getElement('kisssender_longitude'); ?>
+
+
+
+
+
+                <noscript><p>Vyplňte nospam: <input name="rbt" size="6" /></p></noscript>
+                <script type="text/javascript">
+                document.write('<input type="hidden" name="rbt" value="no' + 'spam" />');
+                </script>
+
+
+
+            </form>
+
+        </div>
+    </div>
+
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <h3>Sledujte nás</h3>
+                    <ul class="list-inline social-buttons">
+                        <li><a target="_blank" href="http://www.facebook.com/yaggacz" class="facebook"><i class="fa fa-facebook fa-2x"></i></a></li>
+                        <li><a target="_blank" href="http://www.instagram.com/yagga.cz" class="instagram"><i class="fa fa-instagram fa-2x"></i></a></li>
+                        <li><a target="_blank" href="https://www.youtube.com/channel/UC2zjPieb4gA8VGOKFG620AA" class="youtube"><i class="fa fa-youtube fa-2x"></i></a></li>
+                    </ul>
+                    <p>Yagga.cz © 2014</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <?php
+    $this->jQuery()->enable();
+    echo $this->jQuery();
+    ?>
+
+    <script>
+    
+    
+    function showLocation(position) {
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+        
+        $("#kisssender_latitude").val(latitude);
+        $("#kisssender_longitude").val(longitude);
+        
+    }
+
+    $(document).ready(function() {
+
+        if(navigator.geolocation){
+            // timeout at 60000 milliseconds (60 seconds)
+            navigator.geolocation.getCurrentPosition(showLocation);
+        }
+    });
+    
+    
+    
+    //    $(document).ready(function() {
+    //        function getLocation() {
+    ////            if (navigator.geolocation) {
+    //                navigator.geolocation.getCurrentPosition();
+    //
+    //alert(position.coords.latitude);
+    //
+    //                $("#kisssender_latitude").val(position.coords.latitude);
+    //                $("#kisssender_longitude").val(position.coords.longitude);
+    ////            }
+    //        }
+    //    });
+
+    </script>
+
+</body>
+</html>

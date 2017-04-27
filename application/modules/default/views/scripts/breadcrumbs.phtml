@@ -1,0 +1,22 @@
+<? if (!empty($this->breadcrumbs)) { ?>
+    <div class="breadcrumbs">
+        <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="/">
+                    <i class="fa fa-home"></i><span itemprop="name"><?= ucfirst($_SERVER['HTTP_HOST']) ?></span>
+                </a>
+                <meta itemprop="position" content="1" />
+            </li>
+            <? $breadcrumbPos = 2; ?>
+            <? foreach ($this->breadcrumbs as $breadcrumb) { ?>
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="<?= $breadcrumb->getCategory_url(); ?>">
+                        <span itemprop="name"><?= $breadcrumb->getCategory_name(); ?></span>
+                    </a>
+                    <meta itemprop="position" content="<?= $breadcrumbPos; ?>" />
+                </li>
+                <? $breadcrumbPos++; ?>
+            <? } ?>
+        </ol>
+    </div>
+<? } ?>

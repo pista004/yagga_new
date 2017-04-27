@@ -1,0 +1,96 @@
+
+<?= $this->render('/emailheader.phtml'); ?>
+
+
+<div id="content" style="font-size: 14px; color: #3b3b3b;">
+    <!--                                <h1 style="font-weight: bold; font-size: 24px; color: black;">Potvrzení objednávky</h1> -->
+    <h2 style="font-weight: bold; font-size: 1.1em; padding-top: 30px;  color:#3b3b3b;">Vážený zákazníku,</h2>
+
+    <p style="padding-bottom: 7px; color:#3b3b3b;">
+        děkujeme za Vaši objednávku na Yagga.cz. Vaše objednávka byla úspěšně přijata a bude v co nejkratším termínu vyřízena.
+    </p>
+
+    <h3 style="padding: 0; margin: 0 0 7px 0;  color:#3b3b3b; font-size: 20px;">Objednávka č. <?= $this->order->getOrder_number(); ?></h3>
+
+    <div id="adresses" style="margin-bottom: 10px;">
+        <table style="width: 100%;" cellpadding="2" cellspacing="0">
+            <tr>
+                <td style="width: 50%;">
+                    <strong>Adresa pro doručení</strong><br />
+                    <?
+                    if (
+                            $this->order->getOrder_d_name() &&
+                            $this->order->getOrder_d_surname() &&
+                            $this->order->getOrder_d_street() &&
+                            $this->order->getOrder_d_city() &&
+                            $this->order->getOrder_d_zip_code()
+                    ) {
+                        ?>
+                        <?= $this->order->getOrder_d_name() . ' ' . $this->order->getOrder_d_surname() ?><br />
+                        <?= $this->order->getOrder_d_company() ? $this->order->getOrder_d_company() . "<br />" : ""; ?>
+                        <?= $this->order->getOrder_d_street() ?><br />
+                        <?= $this->order->getOrder_d_zip_code() . ' ' . $this->order->getOrder_d_city() ?><br />
+                    <? } else { ?>
+                        <?= $this->order->getOrder_i_name() . ' ' . $this->order->getOrder_i_surname() ?><br />
+                        <?= $this->order->getOrder_i_street() ?><br />
+                        <?= $this->order->getOrder_i_zip_code() . ' ' . $this->order->getOrder_i_city() ?><br />
+                    <? } ?>
+                </td>
+                <td style="width: 50%;">
+                    <strong>Fakturační adresa</strong><br />
+                    <?= $this->order->getOrder_i_name() . ' ' . $this->order->getOrder_i_surname() ?><br />
+                    <?= $this->order->getOrder_i_street() ?><br />
+                    <?= $this->order->getOrder_i_zip_code() . ' ' . $this->order->getOrder_i_city() ?><br />
+                    <?= $this->order->getOrder_i_company() ? $this->order->getOrder_i_company() . "<br />" : ""; ?>
+                    <?= $this->order->getOrder_i_ico() ? $this->order->getOrder_i_ico() . "<br />" : ""; ?>
+                    <?= $this->order->getOrder_i_dic() ? $this->order->getOrder_i_dic() . "<br />" : ""; ?>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="product" style="font-size: 0.9em; border-color: #c5c3c3; border-width: 1px; border-style: solid; padding: 1px; background-color: #fbfbfb; margin-bottom: 10px; color: black;">
+        <table id="vypis_kosiku" style='width: 100%;' cellpadding="2" cellspacing="0">
+            <tr style="background-color: #ddd;">
+                <td style="padding: 2px 5px 2px 5px; width: 600px;">Název produktu</td>
+                <td style="padding: 2px 5px 2px 5px; width: 200px; text-align: right;">Cena</td>
+            </tr>
+
+            <? if (!empty($this->orderItems)) { ?>
+                <? foreach ($this->orderItems as $orderItem) { ?>
+                    <tr>
+                        <? $variantName = ""; ?>
+                        <? if ($orderItem->getOrder_item_variant_name()) { ?>
+                            <? $variantName = "<br />Varianta: " . $orderItem->getOrder_item_variant_name() ?>
+                        <? } ?>
+                        <td style="padding: 2px 5px 2px 5px;"><?= $this->cartItems[$orderItem->getOrder_item_product_id()]['pieces'] ?>x <?= $orderItem->getOrder_item_product_name(); ?><?= $variantName; ?></td>
+                        <td style="padding: 2px 5px 2px 5px; text-align: right;"><?= number_format($this->escape($this->cartItems[$orderItem->getOrder_item_product_id()]['price']), 0, '', ' '); ?> Kč</td>
+                    </tr>
+                <? } ?>
+            <? } ?>
+            <tr>
+                <td style="padding: 2px 5px 2px 5px;">
+                    Doprava<br />
+                    <?= $this->order->getOrder_delivery_name(); ?>
+                </td>
+                <td style="padding: 2px 5px 2px 5px; text-align: right;"><?= number_format($this->escape($this->order->getOrder_delivery_price()), 0, '', ' '); ?> Kč</td>
+            </tr>
+            <tr>
+                <td style="padding: 2px 5px 2px 5px;">
+                    Platba<br />
+                    <?= $this->order->getOrder_payment_name(); ?>
+                </td>
+                <td style="padding: 2px 5px 2px 5px; text-align: right;"><?= number_format($this->escape($this->order->getOrder_payment_price()), 0, '', ' '); ?> Kč</td>
+            </tr>
+            <tr>
+                <td style="padding: 2px 5px 2px 5px; font-weight: bold;">Cena celkem</td>
+                <? $amount = (int) $this->cartShort['amount'] + (int) $this->order->getOrder_delivery_price() + (int) $this->order->getOrder_payment_price(); ?>
+                <td style="padding: 2px 5px 2px 5px; text-align: right; font-weight: bold;"><?= number_format($this->escape($amount), 0, '', ' '); ?> Kč</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<?= $this->render('/emailfooter.phtml'); ?>
+                         

@@ -1,0 +1,16 @@
+RewriteEngine On
+
+
+RewriteCond %{HTTP_HOST} ^yagga.cz 
+RewriteRule (.*) http://www.yagga.cz/$1 [R=301,QSA,L]
+
+RewriteRule ^\.htaccess$ - [F]
+RewriteRule ^$ /public/index.php [L]
+
+RewriteCond %{REQUEST_URI} !^/public/.*$
+RewriteRule ^(.*)$ /public/$1
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^.*$ - [NC,L]
+
+RewriteRule ^public/.*$ /public/index.php [NC,L]

@@ -1,0 +1,62 @@
+
+<div class="row">
+    <h1>Doprava</h1>
+
+    <div classr="row">
+        <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'delivery', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit dopravu</a>
+    </div>
+
+    <? if (!empty($this->deliveries)) { ?>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Název</td>
+                        <td>Info</td>
+                        <td>Cena</td>
+                        <td>Limit</td>
+                        <td>Nutnost adresy</td>
+                        <td>Aktivní</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <? foreach ($this->deliveries as $delivery) { ?>
+                        <tr>
+                            <td>
+                                <?= $delivery->getDelivery_id() ?>
+                            </td>
+                            <td>
+                                <?= $delivery->getDelivery_name() ?>
+                            </td>
+                            <td>
+                                <?= $delivery->getDelivery_info() ?>
+                            </td>
+                            <td>
+                                <?= $delivery->getDelivery_price_czk() ?>
+                            </td>
+                            <td>
+                                <?= $delivery->getDelivery_free_shipping_limit() ?>
+                            </td>
+                            <td>
+                                <?= $delivery->getDelivery_is_address() ?>
+                            </td>
+                            <td>
+                                <?= $delivery->getDelivery_is_active() ?>
+                            </td>
+
+                            <td class="action-buttons">
+                                <div class="btn-group">
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'delivery', 'action' => 'edit', 'id' => $delivery->getDelivery_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'delivery', 'action' => 'delete', 'id' => $delivery->getDelivery_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                    <? } ?>
+                </tbody>
+            </table>
+        </div>
+    <? } ?>
+
+</div>

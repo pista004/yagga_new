@@ -1,0 +1,67 @@
+
+<div class="order-complete-wrap page-wrap">
+    <div class="container order-complete">
+        <h1>Děkujeme za Vaši objednávku</h1>
+        <h3>Váše objednávka byla úspěšně přijata.</h3>
+        <h2>Číslo objednávky: <?= $this->escape($this->orderNumber); ?></h2>
+        <p>Potvrzení objednávky Vám bylo zasláno na Váš email.<br />O stavu objednávky Vás budeme průběžně informovat emailem.</p>
+    </div>
+
+    <? if ($this->gaEcommerceScript) { ?>
+        <script type="text/javascript">
+    <?= $this->gaEcommerceScript; ?>
+        </script>
+    <? } ?>
+
+
+
+    <? if ($this->heurekaConversionScript) { ?>
+        <script type="text/javascript">
+    <?= $this->heurekaConversionScript; ?>
+        </script>
+    <? } ?>
+
+
+
+    <!-- Facebook Conversion Code for yagga.cz -->
+    <script type="text/javascript">(function() {
+        var _fbq = window._fbq || (window._fbq = []);
+        if (!_fbq.loaded) {
+            var fbds = document.createElement('script');
+            fbds.async = true;
+            fbds.src = '//connect.facebook.net/en_US/fbds.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(fbds, s);
+            _fbq.loaded = true;
+        }
+    })();
+    window._fbq = window._fbq || [];
+    window._fbq.push(['track', '6020573387333', {'value':'<?= $this->orderAmount; ?>','currency':'CZK'}]);
+    </script>
+    <noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6020573387333&amp;cd[value]=<?= $this->orderAmount; ?>&amp;cd[currency]=CZK&amp;noscript=1" /></noscript>
+
+
+    <!-- Google Code for Objedn&aacute;vka Conversion Page -->
+    <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 957455844;
+    var google_conversion_language = "en";
+    var google_conversion_format = "3";
+    var google_conversion_color = "ffffff";
+    var google_conversion_label = "aZWaCMvw11gQ5LvGyAM";
+    var google_conversion_value = <?= $this->orderAmount; ?>;
+    var google_conversion_currency = "CZK";
+    var google_remarketing_only = false;
+    /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/957455844/?value=<?= $this->orderAmount; ?>&amp;currency_code=CZK&amp;label=aZWaCMvw11gQ5LvGyAM&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+
+
+
+</div>

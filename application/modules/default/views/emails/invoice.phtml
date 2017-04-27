@@ -1,0 +1,17 @@
+
+<?= $this->render('/emailheader.phtml'); ?>
+
+
+<div id="content" style="font-size: 14px; color: #3b3b3b;">
+    <h1 style="font-weight: bold; font-size: 1.1em; padding-top: 30px;  color:#3b3b3b;">Vážený zákazníku,</h1>
+
+    <p>děkujeme za Vaši objednávku v internetovém obchodě <a href="http://www.yagga.cz">yagga.cz</a>.</p>
+    
+    <p style="padding-bottom: 0px; margin: 0; color:#3b3b3b;">
+        V příloze tohoto emailu naleznete fakturu k Vaší objednávce č. <strong><?= $this->orderNumber; ?></strong>.
+    </p>
+
+</div>
+
+<?= $this->render('/emailfooter.phtml'); ?>
+                         

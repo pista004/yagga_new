@@ -1,0 +1,62 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Admin');
+echo $this->doctype('HTML5');
+?>
+
+<html lang="en">
+    <head>
+        <? $this->headMeta()->setName('robots', 'noindex, nofollow'); ?>
+        
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headTitle(); ?>
+
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+
+        <?php echo $this->headLink(); ?>
+
+    </head>
+
+    <body>
+        <?php
+        //pokud neni uzivatel prihlasen, menu se nezobrazi
+        if (Zend_Auth::getInstance()->hasIdentity()) {
+            $this->navigation()->menu()->setPartial('partial/adminMenu.phtml');
+            echo $this->navigation()->menu()->render();
+        }
+        ?>
+
+        <? if ($this->errorFlashMessage || $this->infoFlashMessage) { ?>
+            <div class="container-wrap-messages">
+                <? if ($this->errorFlashMessage) { ?>
+                    <div class="alert alert-danger"><a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a><?= $this->errorFlashMessage; ?></div>
+                <? } ?>
+                <? if ($this->infoFlashMessage) { ?>
+                    <div class="alert alert-success"><a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a><?= $this->infoFlashMessage; ?></div>
+                <? } ?>
+            </div>
+        <? } ?>
+
+        <div class="container-wrap">
+            <? echo $this->layout()->content; ?>
+        </div> 
+
+        
+        <?php
+        $this->jQuery()->enable();
+        echo $this->jQuery();
+        ?>
+        
+    </body>
+
+
+
+</html>

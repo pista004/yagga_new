@@ -1,0 +1,85 @@
+<h1>Fotografie <?= $this->escape($this->product->getProduct_name()); ?></h1>
+
+<?= $this->partial('partial/product_navigation.phtml', array('product' => $this->product, 'active_nav' => 'photography')); ?>
+
+
+<a id="add-variant" data-toggle="modal" data-target="#photography-modal" data-product="<?= $this->escape($this->product_id); ?>" href="JavaScript:Void(0);" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit fotografii</a>
+
+<!-- Modal-->
+<div class="modal fade" id="photography-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Nová fotografie</h4>
+            </div>
+            <div class="container" id="new-variant-form-wrap">
+                <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+                      method="<?php echo $this->escape($this->form->getMethod()) ?>"
+                      id="add-photography-form"
+                      enctype="multipart/form-data">
+
+                    <? $element = $this->form; ?>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <?= $element->getElement('file'); ?>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <?= $element->getElement('photography_note')->getLabel(); ?>
+                        </div>
+                        <div class="col-lg-10">
+                            <?= $element->getElement('photography_note'); ?>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+                        <?= $element->getElement('submit_image'); ?>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a class="btn btn-default photography-deletepath-btn" href="<?= $this->url(array('module' => 'admin', 'controller' => 'photography', 'action' => 'deletepath', 'product_id' => $this->escape($this->product_id)), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span> Smazat celou složku</a>
+
+<? if (!empty($this->photos)) { ?>
+    <div class="table-responsive">
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>Fotografie</td>
+                    <td>Hlavní</td>
+                    <td>Popis</td>
+                    <td>Akce</td>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->photos as $photography) { ?>
+                    <tr>
+                        <td><a class="magnific-popup" href="<?= $this->photoPathOriginal . "" . $photography->getPhotography_path(); ?>" title="<?= $photography->getPhotography_note(); ?>"><img src="<?= $this->photoPathThumb . "" . $photography->getPhotography_path(); ?>" alt="<?= $photography->getPhotography_note(); ?>" class="img-rounded"></a></td>
+                        <td>
+                            <? if ($photography->getPhotography_is_main()) { ?>
+                                <a href="JavaScript:void(0);" type="button" class="btn btn-default"><span class="glyphicon glyphicon-star"></span></a>
+                            <? } else { ?>
+                                <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'photography', 'action' => 'setphotographymain', 'id' => $this->escape($photography->getPhotography_id()), 'product_id' => $this->escape($this->product_id)), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-star-empty"></span></a>
+                            <? } ?>
+                        </td>
+                        <td><?= $photography->getPhotography_note() ?></td>
+                        <td>
+                            <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'photography', 'action' => 'delete', 'id' => $this->escape($photography->getPhotography_id()), 'product_id' => $this->escape($this->product_id)), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
+                    </tr>
+                <? } ?>
+            </tbody>
+        </table>
+    </div>
+<? } ?>

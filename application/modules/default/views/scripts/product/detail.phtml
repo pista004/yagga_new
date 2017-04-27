@@ -1,0 +1,229 @@
+<? $product = $this->product; ?>
+<? $photographies = $this->photographies; ?>
+
+<? if (!empty($product)) { ?>
+
+    <?
+    $myImages = new My_Images();
+    ?>
+
+    <div class="product-detail page-wrap">
+
+        <div class="product" itemscope itemtype="http://schema.org/Product">
+            <div class="container product-wrap">
+
+                <? $variants = $product->getVariants(); ?>
+
+
+                <div class="row">
+                    <?php echo $this->render('/breadcrumbs.phtml', array('breadcrumbs' => $this->breadcrumbs)); ?>
+                </div>
+
+
+                <div class="row">
+                    <h1 itemprop="name"><?= $this->escape($product->getProduct_name_variant_name()); ?></h1>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-7 product-detail-left popup-gallery">
+                        <!--
+                        <div class="row">
+
+                        <? if (strpos($product->getMain_photography()->getPhotography_path(), 'http://') !== false) { ?>
+                                    <a class="magnific" title="" href="<?= $this->escape($product->getMain_photography()->getPhotography_path()); ?>">
+                                        <span class="product-detail-img">
+                                            <img class="img-responsive" itemprop="image" src="<?= $this->escape($product->getMain_photography()->getPhotography_path()); ?>" alt="<?= $this->escape($product->getProduct_name()); ?>" title="<?= $this->escape($product->getProduct_name()); ?>" />
+                                        </span>
+                                    </a>
+                        <? } else { ?>
+                                    <a class="magnific" title="" href="/images/upload/product_<?= $this->escape($product->getProduct_id()); ?>/original/<?= $this->escape($product->getMain_photography()->getPhotography_path()); ?>">
+                                        <span class="product-detail-img">
+                                            <img class="img-responsive" itemprop="image" src="/images/upload/product_<?= $this->escape($product->getProduct_id()); ?>/list/<?= $this->escape($product->getMain_photography()->getPhotography_path()); ?>" alt="<?= $this->escape($product->getProduct_name()); ?>" title="<?= $this->escape($product->getProduct_name()); ?>" />
+                                        </span>
+                                    </a>
+                        <? } ?>
+
+                        </div>
+                        -->
+                        
+                        <div class="row">
+                            <a class="magnific" title="" href="<?= $myImages->getProductImagePath($this->escape($product->getProduct_id()), $this->escape($product->getMain_photography()->getPhotography_path()), 'original'); ?>">
+                                <span class="product-detail-img">
+                                    <img class="img-responsive" itemprop="image" src="<?= $myImages->getProductImagePath($this->escape($product->getProduct_id()), $this->escape($product->getMain_photography()->getPhotography_path()), 'list'); ?>" alt="<?= $this->escape($product->getProduct_name()); ?>" title="<?= $this->escape($product->getProduct_name()); ?>" />
+                                </span>
+                            </a>
+                        </div>
+
+                        <? if (!empty($photographies)) { ?>
+                            <div class="row product-images">
+                                <div class="col-md-12">
+                                    <? foreach ($photographies as $photography) { ?>
+                                        <a class="magnific" title="" href="/images/upload/product_<?= $this->escape($product->getProduct_id()); ?>/original/<?= $this->escape($photography->getPhotography_path()); ?>">
+                                            <span class="product-detail-img-thumb img-circle">
+                                                <img class="img-responsive" src="/images/upload/product_<?= $this->escape($product->getProduct_id()); ?>/list/<?= $this->escape($photography->getPhotography_path()); ?>" alt="<?= $this->escape($product->getProduct_name()); ?>" title="<?= $this->escape($product->getProduct_name()); ?>" />
+                                            </span>
+                                        </a>
+                                    <? } ?>
+                                </div>
+                            </div>
+                        <? } ?>
+
+                    </div>
+
+
+
+                    <div class="col-md-5 product-detail-right">
+                        <p class="product-detail-short-note"><?= $product->getProduct_perex(); ?></p>
+                        <? /* if ($product->getProduct_description()) { ?>
+                          <a href="#product-info-description">Detailní popis <i class="fa fa-angle-down"></i></a>
+                          <? } */ ?>
+
+
+
+
+                        <? if ($product->getManufacturer()->getManufacturer_id()) { ?>
+                            <div class="product-detail-manufacturer">
+                                <span>Značka: </span>
+                                <a href="<?= $this->url(array('manufacturerurl' => $product->getManufacturer()->getManufacturer_url()), 'manufacturer_detail_url', true) ?>">
+                                    <span class="itemprop-brand" itemprop="brand"><?= $product->getManufacturer()->getManufacturer_name(); ?></span>
+                                </a>
+                            </div>
+                        <? } ?>
+
+
+                        <? if ($product->getProduct_ean()) { ?>
+                            <p class="product-detail-ean">EAN: <span itemprop="gtin13"><?= $product->getProduct_ean(); ?></span></p>
+                        <? } ?>
+
+
+
+                        <div class="product-detail-price-wrap" itemprop="offers" itemscope itemtype="http://schema.org/Offer">    
+                            <? if ($product->getProduct_recommended_price()) { ?>
+
+                                <? $saleInfo = $this->saleInfo($product->getProduct_price(), $product->getProduct_recommended_price()); ?>
+
+                                <? if ($saleInfo > 0) { ?>
+                                    <div class="sale-ico-wrap">
+                                        <span class="sale-ico">-<?= $saleInfo; ?>%</span>
+                                    </div>
+                                <? } ?>
+
+                                <p class="product-detail-original-price">Původní cena: <span><?= $product->getProduct_recommended_price() ?> Kč</span></p>
+                            <? } ?>
+
+                            <? $price = $product->getProduct_price(); ?>
+
+                            <meta itemprop="priceCurrency" content="CZK" />
+                            <h4 class="product-detail-price" itemprop="price"><?= $this->escape($price); ?> Kč</h4>
+
+
+
+                            <? if ($product->getProduct_is_active() == 1) { ?>
+
+                                <? $stockInfoNum = $product->getProduct_stock(); ?>
+                                <? $stockInfo = $this->stockInfo($stockInfoNum); ?>
+
+                                <?
+                                //if is main product with variants get stock info from variants
+                                if ($product->getProduct_itemgroup_product_id() == NULL && $product->getVariants_count() > 0) {
+
+                                    $stockInfoNum = $product->getVariants_sum_stock();
+                                    $stockInfo = $this->stockInfo($stockInfoNum);
+                                }
+                                ?>
+
+
+                                <span class="product-detail-stock"><span><?= $stockInfo; ?></span></span>
+
+
+
+
+                                <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+                                      method="<?php echo $this->escape($this->form->getMethod()) ?>"
+                                      id="add-to-cart-form"
+                                      class="add-to-cart-form"
+                                      enctype="multipart/form-data">
+
+                                    <? /* if ($this->form->getElement('variant')) { ?>
+                                      <?= $this->form->getElement('variant')->getLabel(); ?>
+                                      <?= $this->form->getElement('variant'); ?>
+                                      <? } */ ?>
+
+                                    <?= $this->variantsDetail($product->getVariants(), $product->getProduct_id()); ?>
+
+                                    <?
+                                    //if is main product with variants user have to select variant to add to cart, if user click on add to cart button, show info "select variant first"
+                                    if ($product->getProduct_itemgroup_product_id() == NULL && $product->getVariants_count() > 0) {
+                                        ?>
+
+                                        <div id="submit" class="btn btn-default add-to-cart select-variant" onclick="">Vložit do košíku</div>
+
+                                        <?= $this->render('/cart_modal.phtml'); ?>
+
+                                    <? } else { ?>
+
+                                        <?= $this->form->getElement('product_id'); ?>
+                                        <?= $this->form->getElement('pieces'); ?>
+                                        <?= $this->form->getElement('price'); ?>
+                                        <? /* $this->form->getElement('variant_id'); */ ?>
+
+
+                                        <?= $this->form->getElement('submit'); ?>
+
+
+                                    <? } ?>
+                                </form>
+
+
+                            <? } else { ?>
+                                <span class="product-detail-deactivated">Bohužel, tento produkt již není v nabídce</span>   
+                            <? } ?>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="cart-modal-wrap"></div>
+
+                <? /* $this->render('/cart_modal.phtml'); */ ?>
+
+
+
+
+                <? if ($product->getProduct_description()) { ?>
+                    <div class="row">
+                        <div id="product-info-description" class="product-info">
+                            <div class="container">
+                                <div class="row">
+                                    <h2>Popis</h2>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                    <p itemprop="description">
+                                        <?= $product->getProduct_description(); ?>
+                                    </p>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <? } ?>
+
+            </div>
+        </div>
+
+
+        <div class="container product-list-wrap">
+            <?php
+            /*
+              echo $this->render('/product_list.phtml');
+
+             */
+            ?>
+        </div>
+
+
+        <?php /* echo $this->render('/products_recommended.phtml'); */ ?>
+
+
+    </div>
+<? } ?>

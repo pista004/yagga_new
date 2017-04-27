@@ -1,0 +1,39 @@
+<h1>Úprava párování výrobce</h1>
+
+<div class="container">
+    <div class="row">
+        <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+              method="<?php echo $this->escape($this->form->getMethod()) ?>"
+              enctype="multipart/form-data">
+
+            <? $element = $this->form; ?>
+
+            <? $manufacturerAffiliate = $this->manufacturerAffiliateById; ?>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    Affiliate výrobce
+                </div>
+                <div class="col-lg-3">
+                    <?= $manufacturerAffiliate->getManufacturer_affiliate_manufacturer_name(); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_id')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('manufacturer_id'); ?>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('submit'); ?>
+                </div>
+            </div>   
+        </form>
+    </div>
+</div>

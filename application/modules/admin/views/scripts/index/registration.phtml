@@ -1,0 +1,10 @@
+<form class="form-signin" action="<?php echo $this->escape($this->form->getAction()) ?>"
+      method="<?php echo $this->escape($this->form->getMethod()) ?>"
+      enctype="multipart/form-data">
+    <h2>Registrace</h2>
+    <?= $this->form->getElement('admin_email'); ?>
+    <?= $this->form->getElement('admin_password'); ?>
+    <?= $this->form->getElement('password_confirm'); ?>
+    <?= $this->form->getElement('submit'); ?>
+
+</form>

@@ -1,0 +1,27 @@
+<? if (!empty($this->instagram)) { ?>
+    <div class="row instagram-wrap">
+
+        <div class="col-md-12">
+            <h2 class="text-center">Sleduj Yagga.cz na Instagramu</h2>
+            <p>
+                <a href="https://www.instagram.com/yagga.cz/" target="_blank">Instagram Yagga.cz</a>
+            </p>
+        </div>
+
+        <? foreach ($this->instagram as $item) { ?>
+
+            <div class="col-xs-6 col-sm-4 col-md-2 instagram-item">
+                <a href="<?= $item['link'] ?>" target="_blank">
+                    <img src="<?= $item['image'] ?>" alt="" />
+        <!--                    <p><?= $this->escape($item['text']); ?> </p>-->
+                </a>
+
+            </div>
+        <? } ?>
+
+    </div>
+
+
+
+
+<? } ?>

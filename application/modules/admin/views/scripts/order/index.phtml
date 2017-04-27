@@ -1,0 +1,98 @@
+<h1>Objednávky</h1>
+
+
+
+<? if (!empty($this->orderResult)) { ?>
+    <div class="table-responsive">
+
+        <table id="order-list" class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>Objednávka č.</td>
+                    <td>Datum</td>
+                    <td>Zákazník</td>
+                    <td>Celková cena</td>
+                    <td>Doprava</td>
+                    <td>Platba</td>
+                    <td>Poznámka</td>
+                    <td>Poznámka admin</td>
+                    <td>Stav</td>
+                    <td>Faktura</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->orderResult as $order) {
+                    ?>
+                    <tr style="background-color: <?= $order->getOrder_state()->getOrder_state_color(); ?>;">
+                        <td>
+                            <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'edit', 'id' => $order->getOrder_id()), null, true) ?>" ><?= $order->getOrder_number() ?></a>
+                        </td>
+                        <td>
+                            <?= date('j. n. Y', $order->getOrder_date()) ?><br /><?= date('H:i:s', $order->getOrder_date()) ?>
+                        </td>
+                        <td>
+                            <?= $order->getOrder_i_name() ?> <?= $order->getOrder_i_surname() ?>
+                        </td>
+                        <td>
+                            <?= $order->getOrder_sum_with_delivery_payment() ?> Kč
+                        </td>
+                        <td>
+                            <?= $order->getOrder_delivery_name(); ?>
+                        </td>
+                        <td>
+                            <?= $order->getOrder_payment_name(); ?>
+                        </td>
+                        <td>
+                            <? if ($order->getOrder_note()) { ?>
+                                <span class="tooltip-init" data-toggle="tooltip" title="<?= $order->getOrder_note(); ?>"><span class="glyphicon glyphicon-info-sign"></span></span>
+                            <? } ?>
+                        </td>
+                        <td>
+                            <? if ($order->getOrder_admin_note()) { ?>
+                                <span class="tooltip-init" data-toggle="tooltip" title="<?= $order->getOrder_admin_note(); ?>"><span class="glyphicon glyphicon-comment"></span></span>
+                            <? } ?>
+                        </td>
+                        <td>
+                            <?= $order->getOrder_state()->getOrder_state_name(); ?>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <? if ($order->getOrder_invoice()->getInvoice_id()) { ?>
+                                    <div class="col-md-7">    
+                                        <div class="btn-group">
+                                            <a class="btn btn-default" target="_blank" href="/invoices/<?= $order->getOrder_invoice()->getInvoice_path(); ?>?v=<?= time(); ?>"><span class="glyphicon glyphicon-file"></span> <?= $order->getOrder_invoice()->getInvoice_path(); ?></a>
+                                        </div>
+                                    </div>
+                                    <? if (!$order->getOrder_invoice()->getInvoice_is_sent()) { ?>
+                                        <div class="col-md-5">        
+                                            <div class="btn-group">
+                                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'sendinvoice', 'orderid' => $order->getOrder_id()), 'default', true); ?>"  onclick="return confirm('Opravdu odeslat fakturu?')"><span class="fa fa-mail-forward"></span> Odeslat</a>
+                                            </div>
+                                        </div>
+                                    <? } else { ?>
+                                        <div class="col-md-5">
+                                            <?= date('j. n. Y', $order->getOrder_invoice()->getInvoice_is_sent()) ?><br /><?= date('H:i:s', $order->getOrder_invoice()->getInvoice_is_sent()) ?>
+                                        </div>
+                                    <? } ?>
+                                <? } else { ?>
+                                    <div class="col-md-7">
+                                        <div class="btn-group">
+                                            <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'orderinvoice', 'id' => $order->getOrder_id()), null, true) ?>"><span class="glyphicon glyphicon-export"></span></a>
+                                        </div>
+                                    </div>
+                                <? } ?>
+                            </div>
+                        </td>
+                        <td class="action-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'edit', 'id' => $order->getOrder_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'delete', 'id' => $order->getOrder_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                <? } ?>
+            </tbody>
+        </table>
+    </div>
+<? } ?>

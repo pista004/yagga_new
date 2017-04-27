@@ -1,0 +1,41 @@
+<h1>Log</h1>
+
+
+<?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/log/')); ?>
+
+<? if (!empty($this->logResult)) { ?>
+    <div class="table-responsive">
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Datum</td>
+                    <td class="text-right"></td>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?
+            foreach ($this->logResult as $log) {
+//                    print_r($log);die;
+                ?>
+                <tr>
+                    <td><?= $log->getLog_id() ?></td>
+                    <td><?= $log->getLog_inserted() ? date('d. m. Y G:i:s', $log->getLog_inserted()) : "" ?></td>
+                    <td class="text-right">
+                        <a class="btn btn-default" data-toggle="collapse" data-target="#viewdetails-<?= $log->getLog_id() ?>">Zobrazit log</a>
+                    </td>
+                </tr>
+                <tr class="collapse" id="viewdetails-<?= $log->getLog_id() ?>">
+                    <td colspan="3">
+                        <div><?= nl2br($log->getLog_message()) ?></div>
+                    </td>
+                </tr>
+            <? } ?>
+            </tbody>
+        </table>
+    </div>
+<? } ?>
+
+<?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/log/')); ?>

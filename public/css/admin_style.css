@@ -1,0 +1,461 @@
+body {
+    background-color: #EEEEEE;
+}
+
+h1{
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.form-signin {
+    margin: 0 auto;
+    max-width: 330px;
+    padding: 15px;
+}
+
+.login-form a.registration-href{
+    text-align: center;
+    display: block;
+}
+
+.admin-logout{
+    margin-top: 7px;
+}
+
+.navbar-collapse .navbar-nav.navbar-right:last-child {
+    margin-right: 0;
+}
+
+.row{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th, .table thead > tr > td, .table tbody > tr > td, .table tfoot > tr > td {
+    vertical-align: middle;
+    padding: 5px;
+}
+
+/*
+Progress bar pri nahravani obrazku - zobrazuje procenta
+*/
+.progress { 
+    position:relative; 
+    width:400px; 
+    border: 1px solid #ddd; 
+    padding: 1px; 
+    border-radius: 3px; 
+    display: none;
+}
+
+.bar { 
+    background-color: #B4F5B4; 
+    width:0%; 
+    height:20px; 
+    border-radius: 3px; 
+}
+
+.percent { 
+    position:absolute; 
+    display:inline-block; 
+    top:3px; 
+    left:48%; 
+}
+
+#output-inner{
+    /*    border: 2px dashed #BBBBBB;*/
+}
+
+#output-inner img{
+    margin-bottom: 4px;
+}
+
+#output-inner a{
+    display: block;
+}
+
+#output-inner div{
+    /*    float: left;*/
+    margin: 0 5px 5px 0;
+}
+
+#output-inner input[type='text']{
+    min-width: 200px;
+}
+
+#output-inner .table-upload-image{
+    width: 180px;
+}
+
+#output-inner .table-upload-radio{
+    width: 80px;
+}
+
+#output-inner .table-upload-button{
+    width: 50px;
+}
+
+.action-buttons{
+    width: 200px;
+    min-width: 140px;
+    text-align: right;
+}
+
+/*
+* container
+*/
+.container-wrap{
+    padding: 2px 15px;
+    margin: 0 13px;
+}
+
+.container-wrap-messages{
+    margin: 0 13px;
+}
+
+.table-responsive{
+    margin: 7px 0 7px 0;
+}
+
+
+/*
+* menu
+*/
+.navbar{
+    background-color: #123f57;
+    background-image: none;
+    margin-bottom: 10px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #FFFFFF;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #DDDDDD;
+}
+
+.navbar-default .navbar-toggle {
+    border: none;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+    background: none;
+}
+
+
+
+/*
+*pridani varianty
+*/
+
+#add-variant{
+    margin: 10px 0 15px 0;
+}
+
+#add-variant-form fieldset{
+    margin-bottom: 5px;
+}
+
+#edit-variant{
+    width: 100%;
+}
+
+/*
+* fotografie
+*/
+
+#output .table{
+    margin: 0;
+}
+
+
+.photography-deletepath-btn{
+    float: right;
+    margin: 10px 0 15px;
+}
+
+
+
+
+
+/*
+* admin - Objednavka
+*/
+
+#order-list tr td{
+    background: none;
+}
+
+#order-edit tr td{
+    padding: 5px;
+}
+
+#order-edit .order-sum td{
+    padding: 10px 5px;
+}
+
+#order-edit .order-item-add{
+    margin: 0 0 15px 0;
+}
+
+#order-edit .email-history{
+    margin-top: 15px;
+}
+
+#order-edit .email-history span.title{
+    border-bottom: 1px solid #eee;
+    display: block;
+}
+
+#order-edit .email-history p{
+    border-bottom: 1px solid #eee;
+}
+
+#order-edit .email-history p span{
+    float: right;
+}
+
+#paginationControl{
+    float: right;
+}
+
+
+/*
+* vypis produktu
+*/
+.product-list a{
+    color: #333;
+}
+
+
+
+.product-list .tooltip-inner {
+    max-width: 407px;
+    width: 407px;
+    height: 407px;
+    padding: 3px 3px 3px 3px;
+    color: #fff;
+    text-align: center;
+    background-color: #000;
+    position: relative;
+}
+
+
+.product-list .tooltip .tooltip-inner img{
+    max-height: 400px;  
+    max-width: 400px;  
+    position: absolute;  
+    top: 2px;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;
+}
+
+.product-list-image{
+    width: 50px;
+}
+
+.product-list-deactivated,
+.product-list-deactivated a{
+    color: #bbb;
+}
+
+.product-list-deactivated .product-list-name,
+.product-list-deactivated .product-list-id{
+    text-decoration: line-through;
+}
+
+.variant-step-back{
+    padding: 0 0 15px 0;
+}
+
+
+
+
+
+/*
+* filter  
+*/
+
+
+.filter-label{
+    padding: 8px 15px 0;
+    float: left;
+}
+
+.filter-selected{
+    float: left;
+    margin: 0 5px 5px 0;
+}
+
+.filter-selected a{
+    border: 1px solid #444;
+    display: block;
+    padding: 6px 8px;
+    text-decoration: none;
+    color: #444;
+}
+
+.filter-selected a:hover{
+    /*    border: 1px solid #fb8c00;
+        color: #fb8c00;*/
+
+    border: 1px solid #D80000;
+    color: #D80000;
+
+}
+
+
+
+.filter-item {
+    width: 370px;
+    float: left;
+    margin: 0 5px 5px 0;
+    position: relative;
+}
+
+.filter-item .filter-item-button{
+    background: #ccc none repeat scroll 0 0;
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 3px;
+    padding: 10px;
+    position: relative;
+    text-transform: uppercase;
+}
+
+
+.filter-item .filter-item-button::before {
+    background: #1c1c1c none repeat scroll 0 0;
+    content: "";
+    display: block;
+    height: 6px;
+    margin-top: -3px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: rotate(-135deg);
+    transition: all 0.3s ease-out 0s;
+    width: 2px;
+}
+
+
+.filter-item .filter-item-button::after{
+    background: #1c1c1c none repeat scroll 0 0;
+    content: "";
+    display: block;
+    height: 6px;
+    margin-top: -3px;
+    position: absolute;
+    right: 13px;
+    top: 50%;
+    transform: rotate(-45deg);
+    transition: all 0.3s ease-out 0s;
+    width: 2px;
+}
+
+
+.filter-item .filter-item-button.filter-on::before {
+    right: 13px;
+}
+
+
+.filter-item .filter-item-button.filter-on::after{
+    right: 10px;
+}
+
+
+.filter-item .filter-wrap{
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 10px 5px 5px;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    display: none;
+}
+
+.filter-item .filter-wrap .filter-fieldset{
+    border: 0 none;
+    margin: 0 0 10px;
+    max-height: 225px;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.filter-item .filter-wrap .filter-fieldset label{
+    margin-left: 5px;
+    padding: 2px;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+.filter-item .filter-wrap .filter-fieldset label input{
+    margin: 0 10px 0 0;
+}
+
+.filter-item .filter-wrap .filter-submit{
+    border: medium none;
+    display: block;
+    margin: 10px 0 0;
+    padding: 7px;
+    text-align: center;
+    width: 100%;
+    z-index: 100;
+    bottom: 0;
+    background-color: #fb8c00;
+    border: 1px solid #ef6c00;
+    color: #fff;
+}
+
+.filter-item .filter-wrap .filter-submit:hover{
+    background-color: #ef6c00;
+}
+
+
+/* parameter-form */
+
+input[type="radio"].parameter-radio{
+    margin-right: 6px;
+    float: left;
+}
+
+
+input[type="radio"].parameter-radio:focus{
+    outline: none;
+}
+
+/*
+zobrazeni dropdown menu po hoveru
+*/
+@media only screen and (min-width: 1041px) {
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
+}
+
+
+.dropdown .dropdown-menu ul.menu-wrap{
+    padding: 0;
+}
+
+
+.dropdown .dropdown-menu .sub-menu a{
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+
+.dropdown .dropdown-menu .sub-menu a:hover{
+    background-color: #eee;
+}

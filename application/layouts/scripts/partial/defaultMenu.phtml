@@ -1,0 +1,100 @@
+<?
+$controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+$options = $this->navigation()->findOneByLabel('Default')->toArray();
+?>
+
+
+<div class="navbar navbar-fixed-top" data-spy="affix" data-offset-top="1000">
+
+    <div class="navbar-header">
+        <!-- <a href="/" class="navbar-brand"><img src="/images/default/yagga-logo.png" alt="yagga" /></a> -->
+        <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="menu-text">MENU</span>
+            <span class="menu-icon-bar-wrap">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+        </a>
+        </a>
+
+    </div>
+
+
+    <div class="navbar-cart">
+        <?
+        $cart = new My_ShoppingCart();
+        $shortCartInfo = $cart->getShortCart();
+
+        $myPrices = new My_Prices();
+        ?>
+
+        <? if (!empty($shortCartInfo)) { ?>
+            <a class="cart cart-full" href="/kosik">
+                <span class="navbar-cart-text">
+                    <i class="fa fa-shopping-cart fa-lg"></i><span class="count"><?= $shortCartInfo['count'] ?></span><span class="amount"><?= $myPrices->getPrice($shortCartInfo['amount']); ?></span>
+                </span>
+            </a>
+        <? } else { ?>
+            <span class="cart cart-empty">
+                <span class="navbar-cart-text">
+                    <i class="fa fa-shopping-cart fa-lg"></i><span class="count">0</span><span class="amount">Košík je prázdný</span>
+                </span>
+                
+            </span>
+        <? } ?>
+    </div>
+
+
+    <div class="navbar-collapse collapse" id="navbar">
+        <ul class="nav navbar-nav">
+            <? foreach ($options['pages'] as $page1) { ?>        
+                <li class="dropdown">
+                    <a href="<?= $page1['uri'] ?>" role="button" class="dropdown-toggle disabled" data-toggle="dropdown" >
+                        <span><?= $page1['label'] ?> </span>
+                        <? if (!empty($page1['pages'])) { ?>
+                            <i class="fa fa-angle-down"></i>
+                        <? } ?>
+                    </a>
+
+                    <? if (!empty($page1['pages'])) { ?>
+                        <div class="dropdown-menu" role="menu">
+                            <ul class="container menu-wrap">
+                                <? foreach ($page1['pages'] as $page2) { ?>        
+                                    <!--                                    <li class="sub-menu">-->
+                                    <li class="sub-menu list-unstyled col-md-3">
+
+                                        <a href="<?= $page2['uri'] ?>">
+                                            <span><?= $page2['label'] ?></span>
+                                        </a>
+                                        <? if (!empty($page2['pages'])) { ?>
+                                            <ul class="sub-sub-menu">
+                                                <? foreach ($page2['pages'] as $page3) { ?>        
+                                                    <li>
+                                                        <a href="<?= $page3['uri'] ?>">
+                                                            <span><?= $page3['label'] ?></span>
+                                                        </a>
+                                                        <? if (!empty($page3['pages'])) { ?>
+
+                                                        <? } ?>
+                                                    </li>
+                                                <? } ?>
+                                            </ul>
+                                        <? } ?>
+                                    </li>
+                                <? } ?>
+                            </ul>
+                        </div>
+                    <? } ?>
+                </li>
+            <? } ?>
+        </ul>
+        <!--                
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#sec1">Hodinky</a></li>
+                            <li><a href="#sec2">Vše o nákupu</a></li>
+                            <li><a href="#sec3">Kontakt</a></li>
+                        </ul>-->
+
+    </div>
+</div>
+

@@ -1,0 +1,86 @@
+<h1>Varianty <?= $this->escape($this->product->getProduct_name()); ?></h1>
+
+<?= $this->partial('partial/product_navigation.phtml', array('product' => $this->product, 'active_nav' => 'variant')); ?>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'add', 'product_id' => $this->product->getProduct_id()), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit varianu</a>
+    </div>
+</div>
+
+<? if (!empty($this->variants)) { ?>
+    <div class="row">
+        <div class="col-md-4 text-left product-count">
+            <p>Počet nalezených produktů: <?= $this->paginator->getTotalItemCount(); ?> </p>
+        </div>
+    </div>
+
+    <div class="table-responsive product-list">
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Fotka</td>
+                    <td>Název</td>
+                    <td>Krátký název</td>
+                    <td>Cena</td>
+                    <td>Skladem</td>
+                    <td>Vloženo</td>
+                    <td>Zobrazovat od</td>
+                    <td>Skončí</td>
+                    <td>Aktivní</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->variants as $product) { ?>
+                    <tr <? if ($product->getProduct_is_active() != 1) { ?>class="product-list-deactivated"<? } ?>>
+                        <td><span class="product-list-id"><?= $product->getProduct_id() ?></span></td>
+                        <td>
+                            <? $thumbImage = IMAGE_UPLOAD_PATH . "/product_" . $product->getProduct_id() . "/thumb/" . $product->getPhotographies()->getPhotography_path(); ?>
+
+                            <? if (file_exists($thumbImage)) { ?>
+                                <a class="tooltip-init" data-toggle="tooltip" data-placement="right" data-html="true" data-title="<img src='/images/upload/product_<?= $product->getProduct_id() ?>/list/<?= $product->getPhotographies()->getPhotography_path(); ?>' />" href="<?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'edit', 'id' => $product->getProduct_id()), null, true) ?>">
+                                    <img class="product-list-image" src="/images/upload/product_<?= $product->getProduct_id() ?>/thumb/<?= $product->getPhotographies()->getPhotography_path(); ?>" />
+                                </a>
+                            <? } ?>
+                        </td>
+                        <td>
+                            <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'edit', 'id' => $product->getProduct_id()), null, true) ?>">
+                                <span class="product-list-name"><?= $product->getProduct_name() ?></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'edit', 'id' => $product->getProduct_id()), null, true) ?>">
+                                <span class="product-list-name"><?= $product->getProduct_variant_name() ?></span>
+                            </a>
+                        </td>
+                        <td>
+                            <?= $this->numberFormat($product->getProduct_price()); ?>
+                        </td>
+                            <td><?= $product->getProduct_stock() ? $product->getProduct_stock() : "0" ?></td>
+                        <td><?= $product->getProduct_insert_date() ? date('d. m. Y', $product->getProduct_insert_date()) : "" ?></td>
+                        <td><?= $product->getProduct_active_from_date() ? date('d. m. Y', $product->getProduct_active_from_date()) : "" ?></td>
+                        <td><?= $product->getProduct_expire_date() ? date('d. m. Y', $product->getProduct_expire_date()) : "" ?></td>
+                        <td><?= $product->getProduct_is_active() ?></td>
+                        <td class="action-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-default" target="_blank"  href="<?= $this->url(array('detailurl' => $product->getProduct_url()), 'product_url', true) ?>"><span class="glyphicon glyphicon-link"></span></a>
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'edit', 'id' => $product->getProduct_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'delete', 'id' => $product->getProduct_id(), 'product_id' => $product->getProduct_itemgroup_product_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                <? } ?>
+            </tbody>
+        </table>
+    </div>
+<? } else { ?>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Pro tento produkt neexistuje žádná varianta</p>
+        </div>
+    </div>
+<? } ?>

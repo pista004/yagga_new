@@ -1,0 +1,106 @@
+<h1>Editace kategorie</h1>
+
+<form action="<?php echo $this->escape($this->form->getAction()) ?>"
+      method="<?php echo $this->escape($this->form->getMethod()) ?>"
+      id="edit-category-form"
+      enctype="multipart/form-data">
+
+    <? $element = $this->form; ?>
+
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_name')->getLabel(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $element->getElement('category_name'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_description')->getLabel(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $element->getElement('category_description'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_parent')->getLabel(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $element->getElement('category_parent'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_url')->getLabel(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $element->getElement('category_url'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_h1')->getLabel(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $element->getElement('category_h1'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_seo_title')->getLabel(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $element->getElement('category_seo_title'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_seo_meta_description')->getLabel(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $element->getElement('category_seo_meta_description'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_category_heureka')->getLabel(); ?>
+        </div>
+        <div class="col-lg-7">
+            <?= $element->getElement('category_category_heureka'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_order')->getLabel(); ?>
+        </div>
+        <div class="col-lg-1">
+            <?= $element->getElement('category_order'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('category_is_active')->getLabel(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $element->getElement('category_is_active'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element->getElement('submit'); ?>
+        </div>
+    </div>   
+</form>

@@ -1,0 +1,41 @@
+<h1>Párování kategorií</h1>
+
+<? if ($this->categoryAffiliateResult) { ?>
+
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Název affiliate kategorie</td>
+                        <td>Název kategorie</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <? foreach ($this->categoryAffiliateResult as $categoryAffiliate) { ?>
+                        <tr>
+                            <td>
+                                <?= $categoryAffiliate->getCategory_affiliate_category_id() ?>
+                            </td>
+                            <td>
+                                <?= $categoryAffiliate->getCategory_affiliate_category_name() ?>
+                            </td>
+                            <td>
+                                <? if ($categoryAffiliate->getCategory() instanceof Admin_Model_Category) { ?>
+                                    <?= $categoryAffiliate->getCategory()->getCategory_structure(); ?>
+                                <? } ?>
+                            </td>
+                            <td class="action-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'categoryaffiliate', 'action' => 'edit', 'id' => $categoryAffiliate->getCategory_affiliate_category_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                            </div>
+                        </td>
+                        </tr>
+                    <? } ?>
+
+                </tbody>
+            </table>
+
+        </div>
+<? } ?>

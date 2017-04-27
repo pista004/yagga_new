@@ -1,0 +1,41 @@
+
+<div class="article-list page-wrap">
+    <div class="container article-list-wrap">
+
+        <div class="row">
+            <h1>Blog</h1>
+        </div>
+
+        <? if (!empty($this->articles)) { ?>
+
+
+            <? foreach ($this->articles as $article) { ?>
+
+                <div class="row article-item-wrap">
+                    <p class="article-date"><?= date('j. n. Y', $article->getArticle_active_from_date()); ?></p>
+
+                    <!--                    <div class="col-md-12">-->
+                    <div class="article-item" >
+                        <? if ($article->getArticle_photography()->getPhotography_id()) { ?>
+                            <a href="<?= $this->url(array('articleurl' => $article->getArticle_url()), 'article_url', true) ?>"><img class="img-responsive" src="/images/upload_article/article_<?= $article->getArticle_id() ?>/thumb/<?= $article->getArticle_photography()->getPhotography_path(); ?>" /></a>
+                        <? } ?>
+                        <h2><a href="<?= $this->url(array('articleurl' => $article->getArticle_url()), 'article_url', true) ?>"><?= $article->getArticle_name(); ?></a></h2>
+                        <div class="article-perex"><?= $article->getArticle_perex(); ?></div>
+                    </div>
+                    <!--                    </div>-->
+
+                </div>
+
+            <? } ?>
+
+        <? } else { ?>
+            <div class="row">
+
+                <p>Bedlivě nás sledujte, první článek je téměř hotový...</p>
+
+            </div>
+        <? } ?>
+    </div>
+</div>
+
+

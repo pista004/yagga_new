@@ -1,0 +1,82 @@
+<?php
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=utf-8');
+$this->headTitle()->setSeparator(' - ');
+$this->headTitle('Rekonstrukce | Yagga.cz');
+echo $this->doctype('HTML5');
+?>
+
+<html lang="cs">
+    <head>    
+        <? $this->headMeta()->setName('description', $this->metaDescription); ?>
+        <? $this->headMeta()->setName('robots', 'all, index, follow'); ?>
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headTitle(); ?>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+
+        <!-- facebook meta image -->
+        <? if ($this->facebookImageUrl) { ?>
+            <meta property="og:image" content="<?= $this->facebookImageUrl ?>"/>
+            <link rel="image_src" type="image/jpeg" href="<?= $this->facebookImageUrl ?>" />
+        <? } ?>
+
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+
+        <link rel="shortcut icon" href="/images/default/favico.ico" />
+
+        <!-- canonical pages -->
+        <? if ($this->canonicalPage) { ?>
+            <link rel="canonical" href="<?= $this->canonicalPage ?>" />
+        <? } ?>
+        <?php echo $this->headLink(); ?>
+        <?php /* echo $this->jQuery()->enable(); */ ?>
+
+
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+<div>
+
+    <!--    <div class="logo">
+            <a href="/"><img src="/images/default/main-page/swagwear-logo2.png" alt="logo" class="img-responsive" /></a>
+            <p><span>nejstylovější hadry</span></p>
+        </div>    -->
+
+    <!--
+        <div class="row manufacturer-detail-categories">
+            <div class="container">
+                <ul>
+    <? foreach ($this->categories as $category) { ?>
+                                                    <li><a href="<?= $category->getCategory_url(); ?>"><?= $category->getCategory_name(); ?></a></li>
+    <? } ?>
+                </ul>
+            </div>
+        </div>
+    -->
+
+    <div class="container">
+        <div class="row">
+            <p class="text-center">Omlouváme se, stránky jsou momentálně nedostupné</p>
+            <h1 class="text-center">Připravujeme pro Vás nové stránky</h1>
+            <p class="text-center">Navštivte naše partnerské stránky <a href="http://www.milujemecestovani.cz">www.milujemecestovani.cz</a> a <a href="http://www.swagwear.cz">www.swagwear.cz</a></p>
+            
+            
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

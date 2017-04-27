@@ -1,0 +1,62 @@
+<form action="<?php echo $this->escape($this->form_variant->getAction()) ?>"
+                              method="<?php echo $this->escape($this->form_variant->getMethod()) ?>"
+                              id="add-variant-form-ajax"
+                              enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <? $element_variant = $this->form_variant; ?>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <?= $element_variant->getElement('variant_name')->getLabel(); ?>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <?= $element_variant->getElement('variant_name'); ?>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <?= $element_variant->getElement('variant_stock')->getLabel(); ?>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <?= $element_variant->getElement('variant_stock'); ?>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <?= $element_variant->getElement('variant_purchase_price')->getLabel(); ?>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <?= $element_variant->getElement('variant_purchase_price'); ?>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <?= $element_variant->getElement('variant_price')->getLabel(); ?>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <?= $element_variant->getElement('variant_price'); ?>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <?= $element_variant->getElement('variant_is_active')->getLabel(); ?>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <?= $element_variant->getElement('variant_is_active'); ?>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <?= $element_variant->getElement('variant_hidden') ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Zavřít</button>
+                                <?= $this->form_variant->getElement('submit'); ?>
+                            </div>
+                        </form>

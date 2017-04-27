@@ -1,0 +1,59 @@
+<div class="row">
+    <h1>Články</h1>
+    <div classr="row">
+        <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'article', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit článek</a>
+    </div>
+
+    <? if (!empty($this->articles)) { ?>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Obrázek</td>
+                        <td>Název</td>
+                        <td>Vloženo</td>
+                        <td>Aktivní od</td>
+                        <td>Aktivní</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <? foreach ($this->articles as $article) { ?>
+                        <tr>
+                            <td>
+                                <?= $article->getArticle_id() ?>
+                            </td>
+                            <td>
+                                <? if ($article->getArticle_photography()->getPhotography_id()) { ?>
+                                    <img style="width: 100px;" src="/images/upload_article/article_<?= $article->getArticle_id() ?>/thumb/<?= $article->getArticle_photography()->getPhotography_path(); ?>" />
+                                <? } ?>
+                            </td>
+                            <td>
+                                <?= $article->getArticle_name() ?>
+                            </td>
+                            <td>
+                                <?= $article->getArticle_insert_date() ? date('d. m. Y', $article->getArticle_insert_date()) : "" ?>
+                            </td>
+                            <td>
+                                <?= $article->getArticle_active_from_date() ? date('d. m. Y', $article->getArticle_active_from_date()) : "" ?>
+                            </td>
+                            <td>
+                                <?= $article->getArticle_is_active() ?>
+                            </td>
+
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <a class="btn btn-default" target="_blank"  href="<?= $this->url(array('articleurl' => $article->getArticle_url()), 'article_url', true) ?>"><span class="glyphicon glyphicon-link"></span></a>
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'article', 'action' => 'edit', 'id' => $article->getArticle_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'article', 'action' => 'delete', 'id' => $article->getArticle_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                                </div>
+                            </td>
+                        </tr>
+                    <? } ?>
+                </tbody>
+            </table>
+        </div>
+    <? } ?>
+
+</div>

@@ -1,0 +1,233 @@
+<h1>Editace produktu <?= $this->escape($this->product->getProduct_name()); ?></h1>
+
+<?= $this->partial('partial/product_navigation.phtml', array('product' => $this->product, 'active_nav' => 'product')); ?>
+
+<div class="container">
+    <div class="row">
+
+        <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+              method="<?php echo $this->escape($this->form->getMethod()) ?>"
+              id="add-product-form"
+              class="include-image-upload"
+              enctype="multipart/form-data">
+
+            <? $element = $this->form; ?>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('submit'); ?>
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_name')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_name'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_stock')->getLabel(); ?>
+                </div>
+                <div class="col-lg-2">
+                    <?= $element->getElement('product_stock'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_purchase_price')->getLabel(); ?>
+                </div>
+                <div class="col-lg-2">
+                    <?= $element->getElement('product_purchase_price'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_recommended_price')->getLabel(); ?>
+                </div>
+                <div class="col-lg-2">
+                    <?= $element->getElement('product_recommended_price'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_price')->getLabel(); ?>
+                </div>
+                <div class="col-lg-2">
+                    <?= $element->getElement('product_price'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_manufacturer_id')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_manufacturer_id'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_active_from_date')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_active_from_date'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_expire_date')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_expire_date'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_code')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_code'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_ean')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_ean'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_perex')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('product_perex'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_description')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('product_description'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_url')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_url'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_seo_title')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_seo_title'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_seo_meta_description')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('product_seo_meta_description'); ?>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_category')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <div class="checkbox">
+                        <?= $element->getElement('product_category'); ?>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_category_heureka')->getLabel(); ?>
+                </div>
+                <div class="col-lg-7">
+                    <?= $element->getElement('product_category_heureka'); ?>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_action')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_action'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_sale')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_sale'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_new')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_new'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_recommend')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_recommend'); ?>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_is_active')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('product_is_active'); ?>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('submit'); ?>
+                </div>
+            </div>   
+        </form>
+    </div>
+</div>  

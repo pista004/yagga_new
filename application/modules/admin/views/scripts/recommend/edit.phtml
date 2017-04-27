@@ -1,0 +1,70 @@
+<h1>Editace produktu - doporučujeme</h1>
+
+<?= $this->partial('partial/product_navigation.phtml', array('product' => $this->product, 'active_nav' => 'recommend')); ?>
+
+<div class="container">
+
+    <div class="row">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+                      method="<?php echo $this->escape($this->form->getMethod()) ?>"
+                      id="add-photography-form"
+                      enctype="multipart/form-data">
+
+                    <? $element = $this->form; ?>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <?= $element->getElement('product_recommend_id')->getLabel(); ?>
+                        </div>
+                        <div class="col-lg-7">
+                            <?= $element->getElement('product_recommend_id'); ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-7">
+                            <?= $element->getElement('submit'); ?>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <? if (!empty($this->recommendProducts)) { ?>
+                <div class="table-responsive">
+
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <td>Fotografie</td>
+                                <td>Název</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <? foreach ($this->recommendProducts as $recommendProduct) { ?>
+                                <tr>
+                                    <td>
+                                        <a class="magnific-popup" href="/images/upload/product_<?= $recommendProduct->getProduct_id(); ?>/original/<?= $recommendProduct->getPhotographies()->getPhotography_path(); ?>" title="<?= $recommendProduct->getPhotographies()->getPhotography_note(); ?>">
+                                            <img src="/images/upload/product_<?= $recommendProduct->getProduct_id(); ?>/thumb/<?= $recommendProduct->getPhotographies()->getPhotography_path(); ?>" alt="<?= $recommendProduct->getPhotographies()->getPhotography_note(); ?>" >
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <?= $recommendProduct->getProduct_name() ?>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'recommend', 'action' => 'delete', 'id' => $this->escape($recommendProduct->getProduct_id()), 'product_id' => $this->escape($this->product_id)), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                                    </td>
+                                </tr>
+                            <? } ?>
+                        </tbody>
+                    </table>
+                </div>
+            <? } ?>
+        </div>
+    </div>
+</div>

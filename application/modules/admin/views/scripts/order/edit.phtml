@@ -1,0 +1,411 @@
+<div class="container" id="order-edit">
+
+    <h1>Editace objednávky</h1>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Faktura</div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <? if ($this->order->getOrder_invoice()->getInvoice_id()) { ?>
+                                <div class="btn-group">
+                                    <a class="btn btn-default" target="_blank" href="/invoices/<?= $this->order->getOrder_invoice()->getInvoice_path(); ?>?v=<?= time(); ?>"><span class="glyphicon glyphicon-file"></span> <?= $this->order->getOrder_invoice()->getInvoice_path(); ?></a>
+                                </div>
+                            <? } else { ?>
+                                <div class="btn-group">
+                                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'orderinvoice', 'id' => $this->order->getOrder_id()), null, true) ?>"><span class="glyphicon glyphicon-export"></span> Vygenerovat fakturu</a>
+                                </div>
+                            <? } ?>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <? if (!$this->order->getOrder_invoice()->getInvoice_is_sent() && $this->order->getOrder_invoice()->getInvoice_id()) { ?>
+                                <div class="invoice-info">        
+                                    <div class="btn-group">
+                                        <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'sendinvoice', 'orderid' => $this->order->getOrder_id()), 'default', true); ?>"  onclick="return confirm('Opravdu odeslat fakturu?')"><span class="fa fa-mail-forward"></span> Odeslat</a>
+                                    </div>
+                                </div>
+                            <? } else if ($this->order->getOrder_invoice()->getInvoice_is_sent() && $this->order->getOrder_invoice()->getInvoice_id()) { ?>
+                                <div class="invoice-info">
+                                    Faktura odeslána:<br />
+                                    <?= date('j. n. Y', $this->order->getOrder_invoice()->getInvoice_is_sent()) ?> - <?= date('H:i:s', $this->order->getOrder_invoice()->getInvoice_is_sent()) ?>
+                                </div>
+                            <? } ?>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+          method="<?php echo $this->escape($this->form->getMethod()) ?>"
+          id="edit-order-form"
+          enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <td>Název</td>
+                                <td>Počet</td>
+                                <td>Cena za ks</td>
+                                <td>Celková cena</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <? foreach ($this->orderItems as $item) { ?>
+                                <tr>
+                                    <td>
+                                        <a target="_blank" href="/<?= $this->escape($item->getOrder_item_product()->getProduct_url()); ?>"> 
+
+                                            <?= $item->getOrder_item_product_name(); ?>
+                                        </a>
+                                        <? if ($item->getOrder_item_product()->getProduct_code()) { ?>
+                                        <?= $item->getOrder_item_product()->getProduct_code(); ?>
+                                            <a target="_blank" href="http://www.moderni-boty.cz/vyhledat.php?search_query=<?= $this->escape($item->getOrder_item_product()->getProduct_code()); ?>"> 
+                                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                                            </a>
+                                        <? } ?>
+                                        <? if ($item->getOrder_item_variant_name()) { ?>
+                                            <br />
+                                            Varianta: <?= $item->getOrder_item_variant_name(); ?>
+                                        <? } ?>
+                                    </td>
+                                    <td><?= $item->getOrder_item_pieces(); ?></td>
+                                    <td><?= $item->getOrder_item_price(); ?> Kč</td>
+                                    <td><?= $item->getOrder_item_total_price(); ?> Kč</td>
+                                    <td class="action-buttons">
+                                        <div class="btn-group">
+                                            <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'edititem', 'id' => $item->getOrder_item_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                            <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'deleteitem', 'id' => $item->getOrder_item_id(), 'orderid' => $this->order->getOrder_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <? } ?>
+                            <tr class="order-sum">
+                                <td class="text-right" colspan="2"><strong>Doprava</strong></td>
+                                <td><?= $this->order->getOrder_delivery_name() ?></td>
+                                <td><?= $this->order->getOrder_delivery_price(); ?> Kč</td>
+                                <td class="action-buttons">
+                                    <div class="btn-group">
+                                        <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'editdelivery', 'id' => $this->order->getOrder_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="order-sum">
+                                <td class="text-right" colspan="2"><strong>Platba</strong></td>
+                                <td><?= $this->order->getOrder_payment_name() ?></td>
+                                <td><?= $this->order->getOrder_payment_price(); ?> Kč</td>
+                                <td class="action-buttons">
+                                    <div class="btn-group">
+                                        <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'editpayment', 'id' => $this->order->getOrder_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="warning order-sum">
+                                <td class="text-right" colspan="3"><strong>Celkem včetně dopravy a platby</strong></td>
+                                <td><strong><?= $this->order->getOrder_sum_with_delivery_payment(); ?> Kč</strong></td>
+                                <td></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-12 order-item-add">
+                <span class="glyphicon glyphicon-plus"></span> <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'order', 'action' => 'additem', 'id' => $this->order->getOrder_id()), null, true) ?>">Přidat produkt k objednávce</a>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Administrace objednávky</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_number')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-5">
+                                    <?= $this->form->getElement('order_number'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_order_state_id')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_order_state_id'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <? if (!empty($this->orderOrderStates)) { ?>
+                            <div class="row">
+                                <div class="col-lg-10 col-lg-offset-1 email-history">
+                                    <div class="row">
+                                        <span class="title">Historie emailů</span>
+                                    </div>
+                                    <div class="row">
+                                        <? foreach ($this->orderOrderStates as $orderOrderState) { ?>
+                                            <p>
+                                                <strong><?= $orderOrderState->getOrder_state()->getOrder_state_name(); ?></strong>:
+                                                <span><?= date('j. n. Y', $orderOrderState->getOrder_order_state_date()) ?> (<?= date('H:i:s', $orderOrderState->getOrder_order_state_date()) ?>)</span>
+
+                                            </p>
+                                        <? } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <? } ?>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><?= $this->form->getElement('order_admin_note')->getLabel(); ?></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <?= $this->form->getElement('order_admin_note'); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Fakturační údaje</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_name')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_i_name'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_surname')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_i_surname'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_email')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_email'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_phone')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_phone'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_street')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_i_street'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_city')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_i_city'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_zip_code')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-5">
+                                    <?= $this->form->getElement('order_i_zip_code'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_country_id')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_i_country_id'); ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_company')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_i_company'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_ico')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_i_ico'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_dic')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_i_dic'); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Doručovací adresa</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_d_name')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_d_name'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_d_surname')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_d_surname'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_d_company')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_d_company'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_d_street')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_d_street'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_d_city')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_d_city'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_d_zip_code')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-5">
+                                    <?= $this->form->getElement('order_d_zip_code'); ?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10  col-lg-offset-1">
+                                <div class="col-lg-3 text-right">
+                                    <?= $this->form->getElement('order_i_country_id')->getLabel(); ?>
+                                </div>
+                                <div class="col-lg-8">
+                                    <?= $this->form->getElement('order_i_country_id'); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><?= $this->form->getElement('order_note')->getLabel(); ?></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <?= $this->form->getElement('order_note'); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <?= $this->form->getElement('submit'); ?>
+        </div>
+    </form>
+
+</div>

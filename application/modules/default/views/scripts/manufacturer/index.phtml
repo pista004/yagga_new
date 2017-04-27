@@ -1,0 +1,45 @@
+
+<div class="manufacturers-wrap">
+    <div class="container manufacturers">
+        <div class="row">
+            <?php echo $this->render('/breadcrumbs.phtml', array('breadcrumbs' => $this->breadcrumbs)); ?>
+        </div>
+        <div class="row">
+            <h1>Značky</h1>
+        </div>
+
+        <div class="row manufacturer-label-navigate">
+            <? foreach ($this->manufacturers as $azKey => $manufacturerByAz) { ?>
+                <a href="#<?= $azKey ?>"><?= $azKey ?></a>
+            <? } ?>
+        </div>
+
+        <div class="row">
+            <? foreach ($this->manufacturers as $azKey => $manufacturerByAz) { ?>
+                <div class="row manufacturer-label" id="<?= $azKey ?>">
+                    <div class="col-md-12">
+                        <span><?= $azKey ?></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <? foreach ($manufacturerByAz as $manufacturer) { ?>
+                        <div class="manufacturers-item col-xs-6 col-sm-2 col-md-2">
+                            <a href="<?= $this->url(array('manufacturerurl' => $manufacturer->getManufacturer_url()), 'manufacturer_detail_url', true) ?>">
+<!--                                <span class="manufacturer-image">
+                                    <? if ($manufacturer->getManufacturer_photography()->getPhotography_path()) { ?>                        
+                                        <img class="img-responsive" src="/images/upload_manufacturer/manufacturer_<?= $manufacturer->getManufacturer_id(); ?>/<?= $manufacturer->getManufacturer_photography()->getPhotography_path(); ?>" alt="<?= $manufacturer->getManufacturer_name(); ?>" title="<?= $manufacturer->getManufacturer_name(); ?>" />
+                                    <? } ?>
+                                </span>-->
+                                <span class="manufacturer-name">
+                                    <p><?= $manufacturer->getManufacturer_name(); ?></p>
+                                </span>
+                            </a>
+                        </div>
+                    <? } ?>
+                </div>
+            <? } ?>
+        </div>
+
+    </div>
+</div>

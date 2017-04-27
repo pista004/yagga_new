@@ -1,0 +1,50 @@
+<h1>Vyhledávání</h1>
+
+
+<div class="row">
+    <div class="col-md-8">
+        <p>hledaný výraz: <strong><?= $this->escape($this->searchTerm); ?></strong></p>
+    </div>
+    <div class="col-md-4">
+        <form action="<?php echo $this->escape($this->formSearch->getAction()) ?>"
+              method="<?php echo $this->escape($this->formSearch->getMethod()) ?>"
+              enctype="multipart/form-data">
+            <div class="col-md-10">
+                <?= $this->formSearch->getElement('term'); ?>
+            </div>
+            <div class="col-md-2">
+                <?= $this->formSearch->getElement('submit'); ?>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<? if (!empty($this->productResult)) { ?>
+
+
+    <div class="row">
+        <div class="col-md-4 text-left product-count">
+            <p>Počet nalezených produktů: <?= $this->paginator->getTotalItemCount(); ?> </p>
+        </div>
+        <div class="col-md-8 text-right">
+            <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/search', 'urlParams' => $this->filterParams)); ?>
+        </div>
+    </div>
+
+
+    <?php
+    echo $this->render('/product_list.phtml');
+    ?>
+
+
+
+
+    <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/search', 'urlParams' => $this->filterParams)); ?>
+
+
+<? } else { ?>
+
+    <h2>Ajéje...</h2>
+    <p>Nebyl nalezen žádný produkt.</p>
+<? } ?>

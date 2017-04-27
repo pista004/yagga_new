@@ -1,0 +1,69 @@
+<div class="table-responsive product-list">
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Fotka</td>
+                <td>Název</td>
+                <td>Cena</td>
+                <td>Kategorie</td>
+                <td>Značka</td>
+                <td>Vloženo</td>
+                <td>Affiliate</td>
+                <td>Aktivní</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <? foreach ($this->productResult as $product) { ?>
+                <tr <? if ($product->getProduct_is_active() != 1) { ?>class="product-list-deactivated"<? } ?>>
+                    <td><span class="product-list-id"><?= $product->getProduct_id() ?></span></td>
+                    <td>
+                        <? $myImages = new My_Images(); ?>
+
+                        <a class="tooltip-init" data-toggle="tooltip" data-placement="right" data-html="true" data-title="<?= $myImages->getProductImage($product, 'list') ?>" href="<?= $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'edit', 'id' => $product->getProduct_id()), null, true) ?>">
+
+                            <?= $myImages->getProductImage($product, 'thumb', array('product-list-image')) ?>
+
+                        </a>
+                    </td>
+                    <td>
+                        <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'edit', 'id' => $product->getProduct_id()), null, true) ?>">
+                            <span class="product-list-name"><?= $product->getProduct_name() ?></span>
+                        </a>
+                    </td>
+                    <td>
+                        <?= $this->numberFormat($product->getProduct_price()); ?>
+                    </td>
+                    <td>
+                        <? $produtCategories = $product->getCategories(); ?>
+                        <? if (!empty($produtCategories)) { ?>
+                            <? foreach ($produtCategories as $productCategory) { ?>
+                                <p><?= $productCategory->getCategory_structure(); ?></p>
+                            <? } ?>
+                        <? } ?>
+                        <? //$product->getCategory()->getCategory_name() ?>
+                    </td>
+                    <td>
+                        <?= $product->getManufacturer()->getManufacturer_name(); ?>
+                    </td>
+                    <td><?= $product->getProduct_insert_date() ? date('d. m. Y', $product->getProduct_insert_date()) : "" ?></td>
+
+                    <td><?= $product->getAffiliate_program()->getAffiliate_program_title() ?></td>
+                    <td><?= $product->getProduct_is_active() ? '<i class="fa fa-check" aria-hidden="true"></i>' : '<i class="fa fa-times-circle" aria-hidden="true"></i>' ?></td>
+                    <td class="action-buttons">
+                        <div class="btn-group">
+                            <? if ($product->getVariants_count()) { ?>
+                                <a class="btn btn-default" title="<?= $this->translate->_('VARIANTS_COUNT') ?>" href="<?= $this->url(array('module' => 'admin', 'controller' => 'variant', 'action' => 'index', 'product_id' => $product->getProduct_id()), null, true) ?>"><span class="fa fa-bars"></span> <?= $product->getVariants_count(); ?></a>
+                            <? } ?>
+                            <a class="btn btn-default" title="<?= $this->translate->_('SHOW_ON_WEB') ?>" target="_blank"  href="<?= $this->url(array('detailurl' => $product->getProduct_url()), 'product_url', true) ?>"><span class="glyphicon glyphicon-link"></span></a>
+                            <a class="btn btn-default" title="<?= $this->translate->_('EDIT') ?>" href="<?= $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'edit', 'id' => $product->getProduct_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="btn btn-default" title="<?= $this->translate->_('DELETE') ?>" href="<?= $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'delete', 'id' => $product->getProduct_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                        </div>
+                    </td>
+                </tr>
+            <? } ?>
+        </tbody>
+    </table>
+</div>

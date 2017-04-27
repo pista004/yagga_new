@@ -1,0 +1,72 @@
+<?
+$controller = Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+
+$options = $this->navigation()->findOneByLabel('Admin')->toArray();
+?>
+
+<!-- Static navbar -->
+<div class="navbar navbar-default navbar-static-top">
+    <!--    <div class="container">-->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <? foreach ($options['pages'] as $page) { ?>        
+                <li class="dropdown <?= ($page['active'] || $page['controller'] == $controller) ? "active" : "" ?>">
+                    <a href="<?= $this->url(array('module' => $page['module'], 'controller' => $page['controller'], 'action' => $page['action']), 'default', true) ?>">
+                        <i class="icon-dashboard"></i>
+                        <span><?= $page['label'] ?></span>
+                        <? if (!empty($page['pages'])) { ?>
+                            <i class="fa fa-angle-down"></i>
+                        <? } ?>
+                    </a>
+
+                    <? if (!empty($page['pages'])) { ?>
+                        <div class="dropdown-menu" role="menu">
+                            <ul class="container menu-wrap">
+                                <? foreach ($page['pages'] as $page2) { ?>        
+                                    <!--                                    <li class="sub-menu">-->
+                                    <li class="sub-menu list-unstyled">
+
+                                        <a href="<?= $this->url(array('module' => $page2['module'], 'controller' => $page2['controller'], 'action' => $page2['action']), 'default', true) ?>">
+                                            <span><?= $page2['label'] ?></span>
+                                        </a>
+                                        <? if (!empty($page2['pages'])) { ?>
+                                            <ul class="sub-sub-menu">
+                                                <? foreach ($page2['pages'] as $page3) { ?>        
+                                                    <li>
+                                                        <a href="<?= $this->url(array('module' => $page3['module'], 'controller' => $page3['controller'], 'action' => $page3['action']), 'default', true) ?>">
+                                                            <span><?= $page3['label'] ?></span>
+                                                        </a>
+                                                        <? if (!empty($page3['pages'])) { ?>
+
+                                                        <? } ?>
+                                                    </li>
+                                                <? } ?>
+                                            </ul>
+                                        <? } ?>
+                                    </li>
+                                <? } ?>
+                            </ul>
+                        </div>
+                    <? } ?>
+
+                </li>
+            <? } ?>
+        </ul>
+        <? if (Zend_Auth::getInstance()->hasIdentity()) { ?>
+            <div class="nav navbar-nav navbar-right admin-logout">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default disabled"><?= Zend_Auth::getInstance()->getIdentity()->admin_email; ?></button>
+                    <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'index', 'action' => 'logout'), null, true); ?>"><span class="glyphicon glyphicon-off"></span> Odhlásit</a>
+                </div>
+            </div>
+        <? } ?>
+    </div><!--/.nav-collapse -->
+    <!--    </div>-->
+</div>

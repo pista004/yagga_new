@@ -1,0 +1,55 @@
+
+<?php if ($this->pageCount): ?>
+    <div id="paginationControl" class="btn-group">
+        <!-- Previous page link -->
+        <?php if (isset($this->previous)): ?>
+            <?
+            $urlParams = array();
+            
+            if (is_array($this->urlParams)) {
+                $urlParams += $this->urlParams;
+            }
+            $urlParams['page'] = $this->previous;
+            ?>
+
+            <a href="/<?= $this->appendParams($this->url, $urlParams); ?>" class="btn">«</a>
+
+        <?php else: ?>
+            <span class="disabled btn">«</span> 
+        <?php endif; ?>
+
+        <!-- Numbered page links -->
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+
+                <?
+                $urlParams = array();
+                if (is_array($this->urlParams)) {
+                    $urlParams += $this->urlParams;
+                }
+                $urlParams['page'] = $page;
+                ?>
+
+                <a href="/<?= $this->appendParams($this->url, $urlParams); ?>" class="btn"><?= $page ?></a>
+            <?php else: ?>
+                <span class="active num btn"><?= $page; ?></span> 
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <?
+            $urlParams = array();
+            if (is_array($this->urlParams)) {
+                $urlParams += $this->urlParams;
+            }
+            $urlParams['page'] = $this->next;
+            ?>
+
+            <a href="/<?= $this->appendParams($this->url, $urlParams); ?>" class="btn">»</a>
+
+        <?php else: ?>
+            <span class="disabled btn">»</span>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

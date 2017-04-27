@@ -1,0 +1,94 @@
+<? //echo $this->pageCount;die;        ?>
+<?php //$this->setDefaultPageRange(3);        ?>
+<?php if ($this->pageCount): ?>
+    <div id="paginationControl" class="btn-group">
+        <!-- Previous page link -->
+        <?php if (isset($this->previous)): ?>
+            <?
+            $urlParams = array();
+
+            if (is_array($this->urlParams)) {
+                $urlParams += $this->urlParams;
+            }
+            $urlParams['page'] = $this->previous;
+            ?>
+
+            <a href="/<?= $this->appendParams($this->url, $urlParams); ?>" class="btn">«</a>
+
+        <?php else: ?>
+            <span class="disabled btn">«</span> 
+        <?php endif; ?>
+
+        <!-- Numbered page links -->
+        <?php if ($this->current > ($this->first + 2) && $this->pageCount > 5) { ?>
+            <?
+            $urlParams = array();
+            if (is_array($this->urlParams)) {
+                $urlParams += $this->urlParams;
+            }
+            $urlParams['page'] = $this->first;
+            ?>
+            <a href="/<?= $this->appendParams($this->url, $urlParams); ?>" class="btn"><?= $this->first ?></a>
+            
+            <? if ($this->current != ($this->first + 3)) { ?>
+                <span class="btn inactive">...</span>
+            <? } ?>
+            
+        <?php } ?>
+
+
+
+        <?php foreach ($this->pagesInRange as $page): ?>
+            <?php if ($page != $this->current): ?>
+
+                <?
+                $urlParams = array();
+                if (is_array($this->urlParams)) {
+                    $urlParams += $this->urlParams;
+                }
+                $urlParams['page'] = $page;
+                ?>
+
+                <a href="/<?= $this->appendParams($this->url, $urlParams); ?>" class="btn"><?= $page ?></a>
+            <?php else: ?>
+                <span class="active num btn"><?= $page; ?></span> 
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+
+        <?php if ($this->current < ($this->last - 2) && $this->pageCount > 5) { ?>
+
+            <?
+            $urlParams = array();
+            if (is_array($this->urlParams)) {
+                $urlParams += $this->urlParams;
+            }
+            $urlParams['page'] = $this->last;
+            ?>
+
+            <? if ($this->current != ($this->last - 3)) { ?>
+                <span class="btn inactive">...</span>
+            <? } ?>
+
+            <a href="/<?= $this->appendParams($this->url, $urlParams); ?>" class="btn"><?= $this->last ?></a>
+        <?php } ?>
+
+
+
+        <!-- Next page link -->
+        <?php if (isset($this->next)): ?>
+            <?
+            $urlParams = array();
+            if (is_array($this->urlParams)) {
+                $urlParams += $this->urlParams;
+            }
+            $urlParams['page'] = $this->next;
+            ?>
+
+            <a href="/<?= $this->appendParams($this->url, $urlParams); ?>" class="btn">»</a>
+
+        <?php else: ?>
+            <span class="disabled btn">»</span>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

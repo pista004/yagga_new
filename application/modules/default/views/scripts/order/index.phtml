@@ -1,0 +1,218 @@
+
+<div class="order-wrap page-wrap">
+
+    <? if (!empty($this->products)) { ?>
+
+        <? $myPrices = new My_Prices(); ?>
+
+        <script text="text/javascript">
+            var dataDeliveryPayment = <?= $this->jsDeliveryPayment; ?>;
+        </script>
+
+        <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+              method="<?php echo $this->escape($this->form->getMethod()) ?>"
+              id="order-form"
+              enctype="multipart/form-data">
+            <div class="container order">
+
+                <div class="row">
+                    <h1>Objednávka</h1>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <? if ($this->deliveryPaymentError) { ?>
+                            <div class="row delivery-payment-error">
+                                <p><?= $this->deliveryPaymentError ?></p>
+                            </div>
+                        <? } ?>
+                        <h2>1. Doprava</h2>
+                        <div class="row">
+                            <?= $this->form->getElement('delivery'); ?>
+                        </div>
+
+                        <h2>2. Platba</h2>
+                        <div class="row">
+                            <?= $this->form->getElement('payment'); ?>
+                        </div>
+
+                        <h2>3. Vaše údaje</h2>
+                        <div class="customer-info">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_i_name')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_i_name'); ?>
+                                    </div>
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_i_surname')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_i_surname'); ?>
+                                    </div>
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_email')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_email'); ?>
+                                    </div>
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_phone')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_phone'); ?>
+                                    </div>
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_i_street')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_i_street'); ?>
+                                    </div>
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_i_city')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_i_city'); ?>
+                                    </div>
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_i_zip_code')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_i_zip_code'); ?>
+                                    </div>
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_i_country_id')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_i_country_id'); ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_i_company')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_i_company'); ?>
+                                    </div>
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_i_ico')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_i_ico'); ?>
+                                    </div>
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_i_dic')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_i_dic'); ?>
+                                    </div>
+                                </div>
+                            </div>    
+
+                            <div class="customer-info-delivery">
+                                <div class="row customer-info-delivery-check">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <?= $this->form->getElement('order_is_d_address'); ?>
+                                            <label for="order_is_d_address" class="order-is-d-address"><?= $this->form->getElement('order_is_d_address')->getLabel(); ?></label>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                                <div class="row delivery-address <?= $this->showFields ? '' : 'hide-fields' ?>">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <?= $this->form->getElement('order_d_name')->getLabel(); ?>
+                                            <?= $this->form->getElement('order_d_name'); ?>
+                                        </div>
+                                        <div class="row">
+                                            <?= $this->form->getElement('order_d_surname')->getLabel(); ?>
+                                            <?= $this->form->getElement('order_d_surname'); ?>
+                                        </div>
+                                        <div class="row">
+                                            <?= $this->form->getElement('order_d_street')->getLabel(); ?>
+                                            <?= $this->form->getElement('order_d_street'); ?>
+                                        </div>
+                                        <div class="row">
+                                            <?= $this->form->getElement('order_d_city')->getLabel(); ?>
+                                            <?= $this->form->getElement('order_d_city'); ?>
+                                        </div>
+                                        <div class="row">
+                                            <?= $this->form->getElement('order_d_zip_code')->getLabel(); ?>
+                                            <?= $this->form->getElement('order_d_zip_code'); ?>
+                                        </div>
+                                        <div class="row">
+                                            <?= $this->form->getElement('order_d_country_id')->getLabel(); ?>
+                                            <?= $this->form->getElement('order_d_country_id'); ?>
+                                        </div>
+                                        <div class="row">
+                                            <?= $this->form->getElement('order_d_company')->getLabel(); ?>
+                                            <?= $this->form->getElement('order_d_company'); ?>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_newsletter'); ?>
+                                        <label for="order_newsletter" class="order-newsletter"><?= $this->form->getElement('order_newsletter')->getLabel(); ?></label>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <?= $this->form->getElement('order_note')->getLabel(); ?>
+                                        <?= $this->form->getElement('order_note'); ?>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+
+
+
+                        <div class="container order-navigations">    
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <?= $this->form->getElement('submit'); ?>
+                                </div> 
+                            </div>    
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <h2>Rekapitulace</h2>
+                        <div class="recapitulation">
+                            <? foreach ($this->products as $item) { ?>
+                                <div class="item">
+                                    <p class="name row"><a href="<?= $this->url(array('detailurl' => $item->getProduct_url()), 'product_url', true) ?>"><?= $this->escape($this->cartItems[$item->getProduct_id()]['pieces']); ?>x <?= $this->escape($item->getProduct_name()); ?></a></p>
+                                    <? if ($item->getProduct_variant_name() != '') { ?>
+                                        <p class="variant row">Varianta: <?= $this->escape($item->getProduct_variant_name()) ?></p>
+                                    <? } ?>
+                                    <p class="price row">
+                                        <span><?= $this->escape($myPrices->getPrice($this->cartItems[$item->getProduct_id()]['price'])) ?></span>
+                                    </p>
+                                </div>
+                            <? } ?>
+                            <div class="item">
+                                <p class="name row">Doprava</p>
+                                <p class="delivery-price row">Nevybráno</p>
+                            </div>
+                            <div class="item">
+                                <p class="name row">Platba</p>
+                                <p class="payment-price row">Nevybráno</p>
+                            </div>
+                            <div class="item amount-wrap">
+                                <p class="name row">Cena celkem</p>
+                                <p class="amount row">
+                                    <span data-amount="<?= $this->escape($this->shortCart['amount']); ?>"><?= $this->escape($myPrices->getPrice($this->shortCart['amount'])); ?></span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <div class="container order-navigations">    
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <a href="/kosik" class="btn btn-default"><i class="fa fa-angle-left"></i>Zpět do košíku</a>
+                    </div>
+                </div>    
+            </div>
+
+        </form>
+    <? } ?> 
+
+
+</div>

@@ -1,0 +1,131 @@
+
+<div class="product-list page-wrap">
+    <div class="container product-list-wrap">
+
+
+        <div class="row">
+            <?php echo $this->render('/breadcrumbs.phtml', array('breadcrumbs' => $this->breadcrumbs)); ?>
+        </div>
+
+        <div class="row">
+            <h1><?= $this->escape($this->h1); ?></h1>
+        </div>
+
+
+        <div class="row">
+            <? if (!empty($this->categoryChilds)) { ?>
+                <ul class="category-childs">
+                    <? foreach ($this->categoryChilds as $child) { ?>
+                        <li>
+                            <a href="/<?= $this->categoryUrls[$child->getCategory_id()]; ?>"><?= $child->getCategory_name(); ?></a>
+                        </li>
+                    <? } ?>
+                </ul>
+            <? } ?>
+        </div>
+
+        <div class="hr-top"><hr /></div>
+
+        <div class="row">
+
+            <div class="col-md-7">
+                <form action="<?php echo $this->escape($this->formFilter->getAction()) ?>"
+                      method="<?php echo $this->escape($this->formFilter->getMethod()) ?>"
+                      id="filter-form"
+                      enctype="multipart/form-data">
+                          <? $formManufacturers = $this->formFilter->getManufacturers(); ?>
+                          <? if (!empty($formManufacturers)) {
+                              ?>
+                        <div class="filter-item">
+
+
+                            <span class="filter-item-button">Značka</span>
+                            <div class="filter-wrap">
+                                <?= $this->formFilter->getDisplayGroup('manufacturers'); ?>
+                                <div>
+                                    <?= $this->formFilter->getElement('submit'); ?>
+                                </div>
+                            </div>
+                        </div>
+                    <? } ?>
+
+                    <? $formVariants = $this->formFilter->getVariants(); ?>
+                    <? if (!empty($formVariants)) {
+                        ?>
+                        <div class="filter-item">
+                            <span class="filter-item-button">Velikost</span>
+                            <div class="filter-wrap">
+                                <?= $this->formFilter->getDisplayGroup('variants'); ?>
+                                <div>
+                                    <?= $this->formFilter->getElement('submit'); ?>
+                                </div>
+                            </div>
+                        </div>
+                    <? } ?>
+
+                </form>
+            </div>
+
+            <div class="col-md-5 text-right">
+                <ul class="filter-sort"> 
+                    <li>
+                        <span>Řadit:</span>
+                    </li>
+                    <li>
+                        <a href="<?= $this->appendParams("/" . $this->categoryUrl, array_merge($this->filterParamsWithoutPage, array('price' => 'asc'))); ?>" class="<?= $this->activePrice == 'asc' ? 'active' : ''; ?>" >Od nejlevnějšího</a>
+                    </li>
+                    <li>
+                        <a href="<?= $this->appendParams("/" . $this->categoryUrl, array_merge($this->filterParamsWithoutPage, array('price' => 'desc'))); ?>" class="<?= $this->activePrice == 'desc' ? 'active' : ''; ?>" >Od nejdražšího</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="hr-bottom"><hr /></div>
+
+        <? if (!empty($this->activeFilterParams)) { ?>
+            <div class="row filters">
+                <span class="filter-label">Zvolené filtry:</span>
+                <? foreach ($this->activeFilterParams as $filterParam) { ?>
+                    <span class="filter-selected">
+                        <a href="<?= $filterParam['url'] ?>">
+                            <i class="fa fa-close"></i>
+                            <?= $filterParam['name'] ?>
+                        </a>
+                    </span>
+                <? } ?>
+
+                <a class="filters-close" title="Zrušit všechny filtry" href="/<?= $this->categoryUrl ?>">
+                    <i class="fa fa-close"></i>
+                </a>
+
+            </div>
+
+        <? } ?>
+
+        <div class="row paginator-wrap">
+            <div class="col-md-4 text-left product-count">
+                <p>Počet nalezených produktů: <?= $this->paginator->getTotalItemCount(); ?> </p>
+            </div>
+            <div class="col-md-8 text-right">
+                <? // print_r($this->paginator);die;  ?>
+                <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => $this->categoryUrl, 'urlParams' => $this->filterParams)); ?>
+            </div>
+        </div>
+
+
+        <?php echo $this->render('/product_list.phtml'); ?>
+
+        
+                <div class="row">
+            <div class="col-md-12 text-right">
+                <? // print_r($this->paginator);die;    ?>
+                <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => $this->categoryUrl, 'urlParams' => $this->filterParams)); ?>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+

@@ -1,0 +1,64 @@
+<h1>Parametry</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'parameter', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit Parametr</a>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-4 text-left product-count">
+        <p>Počet nalezených parametrů: <?= $this->paginator->getTotalItemCount(); ?> </p>
+    </div>
+    <div class="col-md-8 text-right">
+        <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/parameter/', 'urlParams' => $this->filterParams)); ?>
+    </div>
+</div>
+
+
+
+<? if (!empty($this->parameterResult)) { ?>
+    <div class="table-responsive product-list">
+
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Název</td>
+                    <td>Typ</td>
+                    <td>Jednotka</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->parameterResult as $parametr) { ?>
+                    <tr>
+                        <td><?= $parametr->getParameter_id(); ?></td>
+                        <td>
+                            <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'parameter', 'action' => 'edit', 'id' => $parametr->getParameter_id()), null, true) ?>">
+                                <span class="product-list-name"><?= $parametr->getParameter_name() ?></span>
+                            </a>
+                        </td>
+                        <td><?= $parametr->getParameter_type_obj()->getParameter_type_name(); ?></td>
+                        <td><?= $parametr->getParameter_unit()->getParameter_unit_name(); ?></td>
+                        <td class="action-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'parameter', 'action' => 'edit', 'id' => $parametr->getParameter_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'parameter', 'action' => 'delete', 'id' => $parametr->getParameter_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                <? } ?>
+            </tbody>
+        </table>
+    </div>
+<? } else { ?>
+    <h2>Ajéje...</h2>
+    <p>Nebyl nalezen žádný parametr.</p>
+<? } ?>
+
+<?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/parameter/', 'urlParams' => $this->filterParams)); ?>
+
+

@@ -1,0 +1,41 @@
+<h1>Přidání produktu</h1>
+
+
+<div class="container">
+    <div class="row">
+        <form action="<?php echo $this->escape($this->form->getAction()) ?>"
+              method="<?php echo $this->escape($this->form->getMethod()) ?>"
+              enctype="multipart/form-data">
+
+            <? $element = $this->form; ?>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('order_item_product_id')->getLabel(); ?>
+                </div>
+                <div class="col-lg-3">
+                    <?= $element->getElement('order_item_product_id'); ?>
+                </div>
+            </div>
+
+            <div class="row" id="order-item-variant">
+                <?php echo $this->render('/ajax/addorderitemvariant.phtml'); ?>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    <?= $element->getElement('order_item_pieces')->getLabel(); ?>
+                </div>
+                <div class="col-lg-1">
+                    <?= $element->getElement('order_item_pieces'); ?>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-lg-offset-3">
+                    <?= $element->getElement('submit'); ?>
+                </div>
+            </div>   
+        </form>
+    </div>
+</div>

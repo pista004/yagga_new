@@ -1,0 +1,126 @@
+
+<div class="header alt">
+
+    <!--    <div class="logo">
+            <a href="/"><img src="/images/default/main-page/swagwear-logo2.png" alt="logo" class="img-responsive" /></a>
+            <p><span>nejstylovější hadry</span></p>
+        </div>    -->
+
+    <!--
+        <div class="row manufacturer-detail-categories">
+            <div class="container">
+                <ul>
+    <? foreach ($this->categories as $category) { ?>
+                                                    <li><a href="<?= $category->getCategory_url(); ?>"><?= $category->getCategory_name(); ?></a></li>
+    <? } ?>
+                </ul>
+            </div>
+        </div>
+    -->
+
+    <div class="container header-hrefs">
+        <div class="row">
+            <p class="index-header-text1">PODZIM</p>
+            <p class="index-header-text2">v nových</p>
+            <p class="index-header-text3">BOTÁCH</p>
+                <a href="/damske-boty">Musím mít!</a>
+        </div>
+    </div>
+
+</div>
+
+
+<?= $this->render('/shop_info.phtml'); ?>
+
+
+
+<? /* if (!empty($this->manufacturers)) { ?>
+    <div class="row index-manufacturers">
+        <div class="index-manufacturers-items">
+            <div class="col-md-12">
+                <div class="well-none">
+                    <div id="myCarousel" class="carousel slide">
+
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+
+                            <?
+                            $i = 0;
+                            $startElement = true;
+                            ?>
+                            <? $countM = count($this->manufacturers); ?>
+                            <? foreach ($this->manufacturers as $manufacturer) { ?>
+
+                                <?
+                                if ($startElement == true) {
+                                    $startElement = false;
+                                    ?>
+
+                                    <div class="item<?
+                        if ($i == 0) {
+                            echo ' active';
+                        }
+                                    ?>">
+                                        <div class="row">
+                                        <? } ?>
+                                        <? $i++; ?>
+                                        <div class="col-sm-2 col-xs-6">
+                                            <a href="/znacky/<?= $manufacturer->getManufacturer_url(); ?>">
+                                                <img src="/images/upload_manufacturer/manufacturer_<?= $manufacturer->getManufacturer_id(); ?>/<?= $manufacturer->getManufacturer_photography()->getPhotography_path(); ?>" alt="<?= $manufacturer->getManufacturer_name(); ?>" title="<?= $manufacturer->getManufacturer_name(); ?>" class="img-responsive">
+                                            </a>
+                                        </div>
+
+                                        <?
+                                        if (($i % 6 == 0) || ($i == $countM)) {
+                                            $startElement = true;
+                                            ?>
+
+                                        </div>
+                                    </div>
+                                <? } ?>
+
+                            <? } ?>
+
+                        </div>
+                        <!--/carousel-inner--> 
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-angle-left fa-4"></i></a>
+
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-angle-right fa-4"></i></a>
+                    </div>
+                    <!--/myCarousel-->
+                </div>
+                <!--/well-->
+            </div>
+            <div class="index-manufacturers-href">
+                <a href="/znacky">všechny značky</a>
+            </div>
+        </div>
+    </div>
+<? } */?>
+
+
+
+<?php /* echo $this->render('/products_recommended.phtml'); */ ?>
+
+<div class="product-detail">
+    <div class="container product-list-wrap">
+        <?php
+        echo $this->render('/product_list.phtml');
+        ?>
+    </div>
+</div>
+
+
+<?= $this->render('/sendkiss.phtml'); ?>
+<?php /* echo $this->render('/instagram.phtml'); */ ?>
+
+
+<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "http://www.yagga.cz",
+    <!--    "logo": "http://www.swagwear.cz/images/default/main-page/swagwear-logo2.png"-->
+    }
+</script>
+

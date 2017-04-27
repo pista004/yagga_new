@@ -1,0 +1,110 @@
+
+<div class="cart-wrap page-wrap">
+    <div class="container cart">
+
+        <div class="row">
+            <h1>Nákupní košík</h1>
+        </div>
+
+        <div class="row">
+
+            <? if (!empty($this->products)) { ?>
+                <? $myPrices = new My_Prices(); ?>
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Produkt</th>
+                                <th>Počet kusů</th>
+                                <th>Cena / ks</th>
+                                <th>Celkem</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                            <? foreach ($this->products as $item) { ?>
+
+                                <tr class="cart-item">
+                                    <td class="image">
+                                        <a title="" href="/images/upload/product_<?= $this->escape($item->getProduct_id()); ?>/original/<?= $this->escape($item->getMain_photography()->getPhotography_path()); ?>" class="magnific-popup"><img class="img-responsive" alt="" src="/images/upload/product_<?= $this->escape($item->getProduct_id()); ?>/thumb/<?= $this->escape($item->getMain_photography()->getPhotography_path()); ?>"></a>
+                                    </td>
+                                    <td>
+                                        <h2>
+                                            <a href="<?= $this->url(array('detailurl' => $item->getProduct_url()), 'product_url', true) ?>"><?= $this->escape($item->getProduct_name()); ?></a>
+                                        </h2>
+                                        <? if ($item->getProduct_variant_name() != '') { ?>
+                                            <p class="product-variant-name">Varianta: <?= $item->getProduct_variant_name(); ?></p>
+                                        <? } ?>
+                                        <p><?= $this->stockInfo($item->getProduct_stock()); ?></p>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-default cart-item-edit down" href="JavaScript:void(0);" data-product="<?= $this->escape($item->getProduct_id()); ?>" data-price="<?= $this->escape($item->getProduct_price()); ?>" data-set="down"><i class="fa fa-minus fa-2x" ></i></a>
+
+                                        <div class="pieces">
+                                            <?= $this->escape($this->cartItems[$item->getProduct_id()]['pieces']); ?>
+                                        </div>
+                                        <a class="btn btn-default cart-item-edit up" href="JavaScript:void(0);" data-product="<?= $this->escape($item->getProduct_id()); ?>" data-price="<?= $this->escape($item->getProduct_price()); ?>" data-set="up"><i class="fa fa-plus fa-2x" ></i></a>
+
+                                        <!--                                        
+                                        <div class="pieces-edit">
+                                        </div>
+                                        -->
+                                    </td>
+
+
+                                    <td>
+                                        <span><?= $this->escape($myPrices->getPrice($item->getProduct_price())); ?></span>
+                                    </td>
+                                    <td>
+                                        <span class="amount"><?= $this->escape($myPrices->getPrice($this->cartItems[$item->getProduct_id()]['price'])); ?></span>
+                                    </td>
+                                    <td>
+                                        <a href="<?= $this->url(array('module' => 'default', 'controller' => 'cart', 'action' => 'removecartitem', 'item' => $this->escape($item->getProduct_id())), 'default', true); ?>" class="btn btn-default remove"><i class="fa fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            <? } ?>
+                            <tr class="amount">
+                                <td colspan="4" class="text-right">Cena celkem:</td>
+                                <td colspan="2">
+                                    <?= $this->escape($myPrices->getPrice($this->shortCart['amount'])); ?>
+                                </td>
+                            </tr>    
+
+
+                        </tbody>
+                    </table>
+                </div>
+            <? } else { ?>
+                <div class="row text-center">
+                    <i class="fa fa-frown-o fa-5x"></i>
+                    <h2>Jsem smutný, prázdný košík :-(</h2>
+                    <p>Váš nákupní košík je momentálně prázdný.</p>
+                </div>
+            <? } ?>
+        </div>
+
+
+    </div>
+
+
+    <div class="container cart-navigations">    
+        <div class="row">
+            <div class="col-md-6 text-left">
+                <a href="/" class="btn btn-default"><i class="fa fa-angle-left"></i>Pokračovat v nákupu</a>
+            </div>
+            <div class="col-md-6 text-right">
+                <? if (!empty($this->products)) { ?>
+                    <a href="/objednavka" class="btn btn-default next">Vyplnit a dokončit objednávku<i class="fa fa-angle-right"></i></a>
+                <? } ?>
+            </div> 
+        </div>    
+    </div>
+
+
+
+</div>

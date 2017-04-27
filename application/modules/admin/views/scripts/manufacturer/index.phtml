@@ -1,0 +1,57 @@
+<h1>Výrobci</h1>
+
+<div classr="row">
+    <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'manufacturer', 'action' => 'add'), null, true) ?>" type="button" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Vložit výrobce</a>
+
+    <a href="<?= $this->url(array('module' => 'admin', 'controller' => 'manufactureraffiliate', 'action' => 'index'), null, true) ?>" type="button" class="btn btn-default">Párování výrobců</a>
+
+</div>
+
+<? if ($this->manufacturerResult) { ?>
+
+    <div class="row">
+        <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/manufacturer/')); ?>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Obrázek</td>
+                    <td>Název</td>
+                    <td>Url</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <? foreach ($this->manufacturerResult as $manufacturer) { ?>
+                    <tr>
+                        <td><?= $manufacturer->getManufacturer_id() ?></td>
+                        <td>
+
+                            <? if (is_object($manufacturer->getManufacturer_photography()) && $manufacturer->getManufacturer_photography()->getPhotography_id()) { ?>
+                                <img style="width: 50px;" src="/images/upload_manufacturer/manufacturer_<?= $manufacturer->getManufacturer_id() ?>/<?= $manufacturer->getManufacturer_photography()->getPhotography_path(); ?>" />
+                            <? } ?>
+
+
+                        </td>
+                        <td><?= $manufacturer->getManufacturer_name() ?></td>
+                        <td><?= $manufacturer->getManufacturer_url() ?></td>
+                        <td class="action-buttons">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'manufacturer', 'action' => 'edit', 'id' => $manufacturer->getManufacturer_id()), null, true) ?>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="btn btn-default" href="<?= $this->url(array('module' => 'admin', 'controller' => 'manufacturer', 'action' => 'delete', 'id' => $manufacturer->getManufacturer_id()), null, true) ?>" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-trash"></span></a>
+                            </div>
+                        </td>
+                    </tr>
+                <? } ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <?= $this->paginationControl($this->paginator, 'Sliding', 'paginator.phtml', array('url' => 'admin/manufacturer/')); ?>
+    </div>
+<? } ?>
+

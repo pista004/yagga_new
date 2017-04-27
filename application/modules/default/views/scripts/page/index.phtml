@@ -1,0 +1,15 @@
+
+<? $page = $this->page; ?>
+
+<div class="page-detail page-wrap">
+    <div class="page">
+        <div class="container page-detail-wrap">
+            <div class="row">
+                <h1><?= $page->getPage_name(); ?></h1>
+            </div>
+            <div class="row user-content">
+                <?= $page->getPage_text(); ?>
+            </div>
+        </div>
+    </div>
+</div>

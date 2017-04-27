@@ -1,0 +1,87 @@
+
+<? $subForms = $this->form_variant_ajax->getSubForms(); ?>
+            <? foreach ($subForms as $subForm) { ?>
+                <fieldset id="fieldset-<?= $subForm->getName(); ?>" class="variant-form">
+                    <? foreach ($subForm->getElements() as $element) { ?>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <?= $element->getLabel(); ?>
+                            </div>
+                            <?
+                            //podle id nastavim velikost divu
+                            if (
+                                    (strpos($element->getAttrib('id'), '_stock') !== false) ||
+                                    (strpos($element->getAttrib('id'), '_purchase-price') !== false) ||
+                                    (strpos($element->getAttrib('id'), '_price') !== false) ||
+                                    (strpos($element->getAttrib('id'), '_is-active') !== false)
+                            ) {
+                                ?>
+                                <div class="col-lg-1">
+                                    <?= $element; ?>
+                                </div>
+                            <? } else { ?>
+                                <div class="col-lg-3">
+                                    <?= $element; ?>
+                                </div>
+                            <? } ?>
+
+                        </div>
+
+                    <? } ?>
+                </fieldset>
+            <? } ?>
+
+
+<!--<fieldset class="variant-form">
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element_variant->getElement('variant_name')->getLabel(); ?>
+        </div>
+        <div class="col-lg-3">
+            <?= $element_variant->getElement('variant_name'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element_variant->getElement('variant_stock')->getLabel(); ?>
+        </div>
+        <div class="col-lg-1">
+            <?= $element_variant->getElement('variant_stock'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element_variant->getElement('variant_purchase_price')->getLabel(); ?>
+        </div>
+        <div class="col-lg-1">
+            <?= $element_variant->getElement('variant_purchase_price'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element_variant->getElement('variant_price')->getLabel(); ?>
+        </div>
+        <div class="col-lg-1">
+            <?= $element_variant->getElement('variant_price'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element_variant->getElement('variant_is_active')->getLabel(); ?>
+        </div>
+        <div class="col-lg-1">
+            <?= $element_variant->getElement('variant_is_active'); ?>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-3">
+            <?= $element_variant->getElement('variant_hidden') ?>
+        </div>
+    </div>
+    
+</fieldset>-->

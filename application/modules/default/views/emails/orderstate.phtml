@@ -1,0 +1,21 @@
+
+<?= $this->render('/emailheader.phtml'); ?>
+
+
+<div id="content" style="font-size: 14px; color: #3b3b3b;">
+    <h1 style="font-weight: bold; font-size: 1.1em; padding-top: 30px;  color:#3b3b3b;">Vážený zákazníku,</h1>
+
+    <p style="padding-bottom: 0px; margin: 0; color:#3b3b3b;">
+        stav Vaší objednávky č. <?= $this->orderNumber; ?> byl změněn:
+    </p>
+
+    <h3 style="padding: 0; margin: 0 0 7px 0;  color:#3b3b3b; font-size: 20px;"><?= $this->orderState->getOrder_state_name(); ?></h3>
+
+    <? if($this->orderState->getOrder_state_text()){ ?>
+        <?= $this->orderState->getOrder_state_text() ?>
+    <? } ?>
+    
+</div>
+
+<?= $this->render('/emailfooter.phtml'); ?>
+                         
